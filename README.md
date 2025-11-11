@@ -1,4 +1,4 @@
-# Ziko Alliouate - Front-End Portfolio
+# Zakariae Alliouate - Front-End Portfolio
 
 ![Portfolio Preview](https://via.placeholder.com/1200x300?text=Ziko+Alliouate+Portfolio)
 
