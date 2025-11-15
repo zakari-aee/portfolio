@@ -103,18 +103,19 @@ const About = () => {
                                     <span className="text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-blue-600 font-semibold"> Python</span>.
                                 </p>
 
-                                {/* EDUCATION BUTTON */}
+                                {/* EDUCATION BUTTON (now same style as Download CV) */}
                                 <motion.a
                                     href="#education"
                                     className="relative group inline-flex items-center justify-center w-full sm:w-[300px] overflow-hidden rounded-xl px-[2px] py-[2px] bg-gradient-to-br from-purple-600/70 to-blue-600/70 shadow-[0_0_25px_rgba(124,58,237,0.5)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(99,102,241,0.9)] mt-6"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <span className="w-full h-full rounded-xl bg-black/60 backdrop-blur-xl text-white font-semibold text-md py-3 flex items-center gap-3 justify-center transition-all duration-300 group-hover:bg-black/40">
-                                        <GraduationCap className="w-6 h-6 text-purple-400" />
+                                    <span className="w-full h-full rounded-xl bg-black/60 backdrop-blur-xl text-white font-semibold text-md py-2 flex items-center gap-3 justify-center transition-all duration-300 group-hover:bg-black/40">
+                                        <GraduationCap className="w-5 h-5 text-purple-400" />
                                         Discover My Educational Journey
                                     </span>
                                 </motion.a>
+
                             </motion.div>
                         </div>
                     </div>
