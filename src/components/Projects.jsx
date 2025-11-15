@@ -53,6 +53,7 @@ const Projects = () => {
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
           >
             Projects Showcase
+
           </motion.h2>
 
           <motion.p

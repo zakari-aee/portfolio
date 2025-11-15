@@ -1,111 +1,103 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Code2 } from 'lucide-react';
+import { MapPin, Calendar, Code2, ArrowRight, Heart, Coffee, Lightbulb } from 'lucide-react';
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const [imageLoaded, setImageLoaded] = useState(false);
     const aboutRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => entry.isIntersecting && setIsVisible(true),
-            { threshold: 0.2 }
+            { threshold: 0.1 }
         );
         if (aboutRef.current) observer.observe(aboutRef.current);
         return () => observer.disconnect();
     }, []);
 
-    const transition = { duration: 0.6, ease: 'easeInOut' };
-
     return (
-        <section
-            id="about"
-            ref={aboutRef}
-            className="min-h-screen flex flex-col items-center justify-center py-24 bg-gray-950 px-6 lg:px-20"
-        >
-            <div className="max-w-6xl w-full flex flex-col lg:flex-row gap-16 items-start">
-
-                {/* Profile Image */}
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                    transition={transition}
-                    className="flex flex-col items-center lg:items-start gap-6"
+        <section id="about" ref={aboutRef} className="min-h-screen bg-black py-20 px-4 flex items-center justify-center">
+            <div className="max-w-4xl w-full">
+                {/* Header */}
+                <motion.div className="text-center mb-16"
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                 >
-                    <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 p-1">
-                        <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
-                            <img
-                                src="/me.png"
-                                alt="Zakaria Alliouate"
-                                className="w-full h-full object-cover rounded-full"
-                                onLoad={() => setImageLoaded(true)}
-                                onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = 'https://placehold.co/320x320/000000/ffffff?text=Z.A';
-                                    setImageLoaded(true);
-                                }}
-                            />
-                            {!imageLoaded && (
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-8 h-8 border-4 border-gray-600 border-t-blue-500 rounded-full animate-spin" />
-                                </div>
-                            )}
+                    <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                        About Me
+                    </h2>
+                    <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full" />
+                </motion.div>
+
+                {/* Main Content */}
+                <motion.div className="w-full"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <div className="bg-gray-900/50 rounded-3xl p-8 border border-gray-800 backdrop-blur-sm">
+                        {/* Photo */}
+                        <div className="flex justify-center mb-8">
+                            <div className="w-56 h-56 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 p-1.5">
+                                <img
+                                    src="/me.png"
+                                    alt="Zakariae Alliouate - Full Stack Developer"
+                                    className="w-full h-full rounded-full object-cover border-2 border-white/20 shadow-xl"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Bio */}
+                        <div className="text-center space-y-6">
+                            <h3 className="text-3xl font-bold text-white">
+                                Hello, I'm <span className="text-cyan-400">Zakariae Alliouate</span>
+                            </h3>
+                            
+                            <div className="space-y-4 text-gray-300 leading-relaxed text-lg">
+                                <p>
+                                    A passionate <span className="text-blue-400 font-semibold">Full-Stack Developer</span> from the beautiful city of Meknes, Morocco. 
+                                    I fell in love with coding during my early college years and have been on an incredible journey of learning and growth ever since.
+                                </p>
+                                
+                                <p>
+                                    What drives me is the ability to <span className="text-cyan-400 font-semibold">transform ideas into digital reality</span>. 
+                                    There's something magical about writing code that can solve real problems and make people's lives easier. 
+                                    I believe that great software should not only work flawlessly but also provide an exceptional user experience.
+                                </p>
+
+                                <p>
+                                    When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
+                                    or enjoying a good cup of Moroccan tea while planning my next big project. I'm a firm believer in 
+                                    <span className="text-purple-400 font-semibold"> continuous learning</span> and the power of collaboration.
+                                </p>
+
+                                <p>
+                                    My expertise spans across modern web technologies including <span className="text-green-400 font-semibold">React</span>, 
+                                    <span className="text-green-400 font-semibold"> Node.js</span>, and <span className="text-green-400 font-semibold">Python</span>, 
+                                    with a strong focus on creating scalable, maintainable, and user-friendly applications that stand the test of time.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Info */}
-                    <div className="flex flex-col gap-3 text-gray-300 text-base lg:text-lg">
-                        <div className="flex items-center gap-2"><MapPin className="w-5 h-5 text-blue-400" /> Morocco</div>
-                        <div className="flex items-center gap-2"><Calendar className="w-5 h-5 text-purple-400" /> 3+ Years Experience</div>
-                        <div className="flex items-center gap-2"><Code2 className="w-5 h-5 text-cyan-400" /> Full Stack Developer</div>
-                    </div>
-                </motion.div>
-
-                {/* Text Content */}
-                <div className="flex flex-col gap-6 w-full">
-
-                    {/* Section Title */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ ...transition, delay: 0.1 }}
-                        className="text-left"
+                    {/* Education Button */}
+                    <motion.div className="text-center mt-12"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
                     >
-                        <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-                            About Me
-                        </h2>
-                        <p className="text-xl md:text-2xl text-gray-400 mt-2">Zakariae Alliouate</p>
-                    </motion.div>
-
-                    {/* Content Paragraphs */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                        transition={{ ...transition, delay: 0.2 }}
-                        className="flex flex-col gap-4 text-gray-400 text-lg md:text-xl leading-relaxed"
-                    >
-                        <p>Hi! I'm a passionate full-stack developer building modern web apps. My journey in tech started during college, where I discovered my love for coding.</p>
-                        <p>Currently pursuing B.Tech in Computer Science, I engage in projects and internships combining theory and practice for effective problem-solving.</p>
-                        <p>I specialize in React, Node.js, and modern web technologies, focusing on performant and user-friendly applications.</p>
-                    </motion.div>
-
-                    {/* Skills Button */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ ...transition, delay: 0.3 }}
-                        className="mt-6"
-                    >
-                        <a
-                            href="#skills"
-                            className="px-6 py-3 bg-transparent border border-white/20 text-white rounded-full text-base font-medium hover:bg-white/10 transition-colors flex items-center justify-center"
+                        <motion.a href="#education"
+                            className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-cyan-500/50 text-white rounded-2xl text-lg font-semibold hover:from-blue-600/30 hover:to-cyan-600/30 transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            View My Skills
-                        </a>
+                            Discover My Educational Journey
+                            <ArrowRight className="w-5 h-5" />
+                        </motion.a>
                     </motion.div>
-
-                </div>
+                </motion.div>
             </div>
         </section>
     );

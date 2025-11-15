@@ -17,7 +17,8 @@ const DockNavbar = () => {
         { id: 'education', label: 'Education', icon: GraduationCap, href: '#education' },
         { id: 'skills', label: 'Skills', icon: Code, href: '#skills' },
         { id: 'projects', label: 'Projects', icon: Folder, href: '#projects' },
-        { id: 'contact', label: 'Go to the top', icon: ChevronsUp, href: '#home' },
+        { id: 'contact', label: 'Contact', icon: Mail, href: '#contact' },
+        { id: 'top', label: 'Go to Top', icon: ChevronsUp, href: '#home' },
     ];
 
     useEffect(() => {
@@ -112,7 +113,7 @@ const DockNavbar = () => {
 
             {/* Animated Background Blob */}
             <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${isDockVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-95'}`}>
-                <div className="w-72 h-20 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 blur-2xl rounded-full" />
+                <div className="w-80 h-20 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 blur-2xl rounded-full" />
             </div>
 
             {/* Main Dock */}

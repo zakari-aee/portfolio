@@ -71,6 +71,7 @@ const Education = () => {
                 </h2>
             </motion.div>
 
+
             <div className="flex flex-col gap-10 w-full max-w-6xl">
                 {educationData.map((edu, index) => (
                     <motion.div
