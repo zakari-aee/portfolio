@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Education from './components/Education';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <DockNavbar />
       <Hero />
       <About />
+      <Education />
       <Skills />
       <Projects />
     </div>

@@ -9,8 +9,18 @@ import {
   FaNodeJs,
   FaJsSquare,
   FaCode,
+  FaWindows,
 } from 'react-icons/fa';
-import { SiTailwindcss, SiPostgresql, SiMongodb, SiMysql, SiVim } from 'react-icons/si';
+import { 
+  SiTailwindcss, 
+  SiPostgresql, 
+  SiMongodb, 
+  SiMysql, 
+  SiVim, 
+  SiApple,
+  SiArchlinux,
+  SiVirtualbox
+} from 'react-icons/si';
 import { Brain, MessageCircle, Users, Clock, RefreshCw, Lightbulb, Crown, Sparkles } from 'lucide-react';
 
 const Skills = () => {
@@ -33,6 +43,7 @@ const Skills = () => {
     { id: 'backend', label: 'Backend' },
     { id: 'database', label: 'Database' },
     { id: 'tools', label: 'Tools' },
+    { id: 'os', label: 'Operating Systems' }, // New category
     { id: 'languages', label: 'Languages' },
     { id: 'soft', label: 'Soft Skills' },
   ];
@@ -57,7 +68,13 @@ const Skills = () => {
       { icon: <FaGitAlt className="text-orange-600" />, name: 'Git' },
       { icon: <SiVim className="text-green-500" />, name: 'Vim' },
       { icon: <FaCode className="text-indigo-500" />, name: 'VS Code' },
-      { icon: <FaLinux className="text-gray-700" />, name: 'Linux' },
+      { icon: <SiVirtualbox className="text-blue-400" />, name: 'VirtualBox' }, // Added VirtualBox
+    ],
+    os: [ // New operating systems category
+      { icon: <FaWindows className="text-blue-500" />, name: 'Windows' },
+      { icon: <SiApple className="text-gray-300" />, name: 'macOS' },
+      { icon: <FaLinux className="text-yellow-500" />, name: 'Linux' },
+      { icon: <SiArchlinux className="text-sky-400" />, name: 'Arch Linux' },
     ],
     languages: [
       { icon: <FaPython className="text-blue-500" />, name: 'Python' },
@@ -83,6 +100,7 @@ const Skills = () => {
     ...technicalSkills.backend,
     ...technicalSkills.database,
     ...technicalSkills.tools,
+    ...technicalSkills.os, // Added OS skills
     ...technicalSkills.languages,
     ...softSkills,
   ];
@@ -104,10 +122,11 @@ const Skills = () => {
 
   const SkillCard = ({ skill }) => (
     <motion.div
-      className="bg-gray-800 rounded-2xl flex flex-col items-center justify-center p-6 shadow-lg border border-gray-700 transition-all hover:bg-gray-700"
+      className="bg-gray-800 rounded-2xl flex flex-col items-center justify-center p-6 shadow-lg border border-gray-700 transition-all hover:bg-gray-700 hover:border-blue-400 hover:scale-105"
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4 }}
+      whileHover={{ scale: 1.05 }}
     >
       <div className="text-5xl mb-4">{skill.icon}</div>
       <p className="text-white text-base font-medium text-center">{skill.name}</p>
@@ -148,17 +167,17 @@ const Skills = () => {
           </motion.p>
         </motion.div>
 
-
         {/* Categories (hidden on mobile) */}
         <div className="hidden sm:flex flex-wrap justify-center gap-3 mb-12">
           {categories.map(category => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 border ${activeCategory === category.id
-                  ? 'bg-blue-500 text-white border-blue-500'
-                  : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 hover:border-blue-300'
-                }`}
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 border ${
+                activeCategory === category.id
+                  ? 'bg-blue-500 text-white border-blue-500 shadow-lg shadow-blue-500/30'
+                  : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 hover:border-blue-300 hover:text-white'
+              }`}
             >
               {category.label}
             </button>
@@ -170,7 +189,7 @@ const Skills = () => {
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full"
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, staggerChildren: 0.1 }}
         >
           {filteredSkills.map(skill => (
             <SkillCard key={skill.name} skill={skill} />
