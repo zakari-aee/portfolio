@@ -1,164 +1,125 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Github, Linkedin, MessageCircle, Copy, Check, FileDown, User } from 'lucide-react';
-import { useState } from 'react';
+import { motion } from "framer-motion";
 
-const Hero = () => {
-	const [copied, setCopied] = useState(false);
+// Updated to use correct Simple Icons CDN URLs
+const skills = [
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/react.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/nextdotjs.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/tailwindcss.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/git.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/nodedotjs.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/vercel.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/javascript.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/mongodb.svg",
+  "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/laravel.svg",
+];
 
-	const email = 'zakariaealliouate@gmail.com';
-	const whatsappNumber = '+212632837315';
-	const displayRepos = '15+';
+export default function Hero() {
+  return (
+    <section
+      id="home"
+      className="h-screen w-full flex items-center justify-center bg-black px-4 noisy"
+    >
+      <div className="text-center w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] mt-20">
+        
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-gray-300 md:text-xl mb-6 select-none"
+        >
+          Welcome to the{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-blue-600">
+            web portfolio
+          </span>{" "}
+          of
+        </motion.h2>
 
-	const copyToClipboard = async () => {
-		try {
-			const ta = document.createElement('textarea');
-			ta.value = email;
-			ta.style.position = 'fixed';
-			ta.style.top = '0';
-			ta.style.left = '0';
-			ta.style.opacity = '0';
-			document.body.appendChild(ta);
-			ta.select();
-			document.execCommand('copy');
-			document.body.removeChild(ta);
-			setCopied(true);
-			setTimeout(() => setCopied(false), 2000);
-		} catch (err) {
-			console.error('Failed to copy:', err);
-			try {
-				await navigator.clipboard.writeText(email);
-				setCopied(true);
-				setTimeout(() => setCopied(false), 2000);
-			} catch (navErr) {
-				console.error('Clipboard error:', navErr);
-			}
-		}
-	};
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-white text-6xl xs:text-8xl font-extrabold leading-none tracking-tight md:text-7xl lg:text-8xl select-none"
+        >
+          ZAKARIAE
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-blue-600">
+            {" "}
+            ALLIOUATE
+          </span>
+        </motion.h1>
 
-	const handleEmailClick = (e) => {
-		if (window.innerWidth <= 640) { // mobile
-			window.location.href = `mailto:${email}`;
-			e.preventDefault();
-		} else {
-			copyToClipboard();
-		}
-	};
+        <p className="text-xs md:text-sm text-gray-400 tracking-widest font-semibold mt-12">
+          Scroll down to learn more about my skills & experiences
+        </p>
 
-	return (
-		<div id="home" className="min-h-screen flex flex-col items-center justify-center px-4 bg-gray-950 text-white font-inter relative overflow-hidden">
+        {/* Logos marquee */}
+        <div className="mt-12 overflow-hidden relative w-full">
+          <div className="flex animate-marquee whitespace-nowrap items-center">
+            {skills.map((logo, i) => (
+              <div key={i} className="mx-6 flex-shrink-0">
+                <img
+                  src={logo}
+                  className="h-12 w-12 object-contain filter brightness-0 invert" // Makes logos white
+                  draggable="false"
+                  alt="Skill icon"
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            ))}
+            {skills.map((logo, i) => (
+              <div key={i + skills.length} className="mx-6 flex-shrink-0">
+                <img
+                  src={logo}
+                  className="h-12 w-12 object-contain filter brightness-0 invert"
+                  draggable="false"
+                  alt="Skill icon"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
-			<div className="text-center relative z-10 max-w-3xl mx-auto">
-				{/* Name */}
-				<motion.div
-					className="mb-6 sm:mb-8"
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-				>
-					<h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-white">ZAKARIAE</h1>
-					<h1 className="text-6xl md:text-7xl font-black mb-4 bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-						ALLIOUATE
-					</h1>
-				</motion.div>
+        <div className="flex gap-4 sm:gap-8 text-sm justify-center mt-10 flex-wrap">
+          <a
+            href="mailto:yourmail@gmail.com"
+            className="relative group inline-flex items-center justify-center w-full sm:w-[180px] overflow-hidden rounded-xl px-[2px] py-[2px] bg-gradient-to-br from-purple-600/70 to-blue-600/70 shadow-[0_0_25px_rgba(124,58,237,0.5)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(99,102,241,0.9)]"
+          >
+            <span className="w-full h-full rounded-xl bg-black/60 backdrop-blur-xl text-white font-semibold text-md py-2 flex items-center justify-center transition-all duration-300 group-hover:bg-black/40">
+              Contact Me
+            </span>
+          </a>
 
-				{/* Tagline */}
-				<motion.h2
-					className="text-3xl sm:text-4xl font-semibold mb-6 text-gray-300"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-				>
-					I design & code for web
-				</motion.h2>
+          <a
+            href="https://github.com"
+            target="_blank"
+            className="relative group inline-flex items-center justify-center w-full sm:w-[180px] rounded-xl p-[2px] overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 transition-all duration-500 hover:from-pink-500 hover:to-orange-400 shadow-[0_0_25px_rgba(124,58,237,0.5)] hover:shadow-[0_0_35px_rgba(249,115,22,0.9)]"
+          >
+            <span className="w-full h-full bg-black rounded-xl text-white py-2 font-semibold text-md flex items-center justify-center transition-all duration-500 group-hover:bg-black/40">
+              Github
+            </span>
+          </a>
+        </div>
+      </div>
 
-				{/* Description */}
-				<motion.p
-					className="text-lg sm:text-xl text-gray-400 mb-8 px-2 sm:px-4"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.4 }}
-				>
-					Full Stack Developer creating modern web applications and digital experiences that help businesses grow.
-				</motion.p>
-
-				{/* Actions */}
-				<motion.div
-					className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.6 }}
-				>
-					<a
-						href="/files/cv_pdf/Zakariae_Alliouate_CV.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="px-6 py-3 bg-white text-gray-900 rounded-full text-base font-medium hover:bg-gray-200 transition-colors flex items-center justify-center"
-					>
-						<FileDown className="w-5 h-5 mr-2" />
-						Download CV
-					</a>
-					<a
-						href="#about"
-						className="px-6 py-3 bg-transparent border border-white/20 text-white rounded-full text-base font-medium hover:bg-white/10 transition-colors flex items-center justify-center"
-					>
-						<User className="w-5 h-5 mr-2" />
-						About Me
-					</a>
-				</motion.div>
-
-				{/* Email / Clipboard */}
-				<motion.div
-					className="flex justify-center mb-6"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.7 }}
-				>
-					<button
-						onClick={handleEmailClick}
-						className="group relative flex items-center justify-center gap-2 py-2 px-6 hover:bg-white/5 transition-colors rounded-lg cursor-pointer"
-					>
-						<span className="text-gray-400 group-hover:text-white truncate">{email}</span>
-						<div className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">
-							{copied ? (
-								<Check className="w-4 h-4 text-green-500" />
-							) : (
-								<Copy className="w-4 h-4 text-gray-500 hover:text-white transition-colors" />
-							)}
-						</div>
-					</button>
-				</motion.div>
-
-				{/* Social Links */}
-				<motion.div
-					className="grid grid-cols-3 justify-center gap-6 mt-4"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.8, delay: 0.8 }}
-				>
-					{[
-						{ icon: Github, href: "https://github.com/zakari-aee", count: displayRepos, label: "GitHub Projects" },
-						{ icon: Linkedin, href: "https://linkedin.com/in/zakariae-alliouate", count: "500+", label: "LinkedIn Followers" },
-						{ icon: MessageCircle, href: `https://wa.me/${whatsappNumber}`, count: "24x7", label: "WhatsApp Me" }
-					].map(({ icon: Icon, href, count, label }, idx) => (
-						<a
-							key={idx}
-							href={href}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="group flex flex-col items-center transition-colors"
-						>
-							<Icon className="w-6 h-6 text-gray-400 mb-1 group-hover:text-blue-400 transition-colors duration-300" />
-							<span className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">{count}</span>
-							<span className="text-xs text-gray-400 group-hover:text-blue-400 transition-colors duration-300">{label}</span>
-						</a>
-					))}
-				</motion.div>
-
-			</div>
-		</div>
-	);
-};
-
-export default Hero;
+      <style>
+        {`
+          .animate-marquee {
+            display: flex;
+            animation: marquee 20s linear infinite;
+          }
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}
+      </style>
+    </section>
+  );
+}

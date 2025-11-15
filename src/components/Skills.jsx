@@ -43,55 +43,55 @@ const Skills = () => {
     { id: 'backend', label: 'Backend' },
     { id: 'database', label: 'Database' },
     { id: 'tools', label: 'Tools' },
-    { id: 'os', label: 'Operating Systems' }, // New category
+    { id: 'os', label: 'Operating Systems' },
     { id: 'languages', label: 'Languages' },
     { id: 'soft', label: 'Soft Skills' },
   ];
 
   const technicalSkills = {
     frontend: [
-      { icon: <FaReact className="text-sky-500" />, name: 'React' },
-      { icon: <FaJsSquare className="text-yellow-500" />, name: 'JavaScript' },
-      { icon: <SiTailwindcss className="text-cyan-500" />, name: 'Tailwind CSS' },
+      { icon: <FaReact className="text-purple-500" />, name: 'React' },
+      { icon: <FaJsSquare className="text-yellow-400" />, name: 'JavaScript' },
+      { icon: <SiTailwindcss className="text-cyan-400" />, name: 'Tailwind CSS' },
     ],
     backend: [
-      { icon: <FaPython className="text-blue-500" />, name: 'Python' },
+      { icon: <FaPython className="text-blue-400" />, name: 'Python' },
       { icon: <FaNodeJs className="text-green-500" />, name: 'Node.js' },
       { icon: <FaLaravel className="text-red-500" />, name: 'Laravel' },
     ],
     database: [
-      { icon: <SiPostgresql className="text-blue-600" />, name: 'PostgreSQL' },
-      { icon: <SiMongodb className="text-green-600" />, name: 'MongoDB' },
-      { icon: <SiMysql className="text-sky-600" />, name: 'MySQL' },
+      { icon: <SiPostgresql className="text-blue-500" />, name: 'PostgreSQL' },
+      { icon: <SiMongodb className="text-green-500" />, name: 'MongoDB' },
+      { icon: <SiMysql className="text-blue-400" />, name: 'MySQL' },
     ],
     tools: [
-      { icon: <FaGitAlt className="text-orange-600" />, name: 'Git' },
-      { icon: <SiVim className="text-green-500" />, name: 'Vim' },
-      { icon: <FaCode className="text-indigo-500" />, name: 'VS Code' },
-      { icon: <SiVirtualbox className="text-blue-400" />, name: 'VirtualBox' }, // Added VirtualBox
+      { icon: <FaGitAlt className="text-orange-500" />, name: 'Git' },
+      { icon: <SiVim className="text-green-400" />, name: 'Vim' },
+      { icon: <FaCode className="text-purple-400" />, name: 'VS Code' },
+      { icon: <SiVirtualbox className="text-blue-400" />, name: 'VirtualBox' },
     ],
-    os: [ // New operating systems category
-      { icon: <FaWindows className="text-blue-500" />, name: 'Windows' },
+    os: [
+      { icon: <FaWindows className="text-blue-400" />, name: 'Windows' },
       { icon: <SiApple className="text-gray-300" />, name: 'macOS' },
-      { icon: <FaLinux className="text-yellow-500" />, name: 'Linux' },
+      { icon: <FaLinux className="text-yellow-400" />, name: 'Linux' },
       { icon: <SiArchlinux className="text-sky-400" />, name: 'Arch Linux' },
     ],
     languages: [
-      { icon: <FaPython className="text-blue-500" />, name: 'Python' },
-      { icon: <FaJsSquare className="text-yellow-500" />, name: 'JavaScript' },
-      { icon: <FaCode className="text-blue-400" />, name: 'C' },
+      { icon: <FaPython className="text-blue-400" />, name: 'Python' },
+      { icon: <FaJsSquare className="text-yellow-400" />, name: 'JavaScript' },
+      { icon: <FaCode className="text-blue-500" />, name: 'C' },
     ],
   };
 
   const softSkills = [
-    { icon: <Brain className="text-purple-500" />, name: 'Problem Solving' },
-    { icon: <MessageCircle className="text-blue-500" />, name: 'Communication' },
-    { icon: <Users className="text-green-500" />, name: 'Team Collaboration' },
-    { icon: <Clock className="text-orange-500" />, name: 'Time Management' },
-    { icon: <RefreshCw className="text-cyan-500" />, name: 'Adaptability' },
-    { icon: <Lightbulb className="text-yellow-500" />, name: 'Critical Thinking' },
-    { icon: <Crown className="text-red-500" />, name: 'Leadership' },
-    { icon: <Sparkles className="text-pink-500" />, name: 'Creativity' },
+    { icon: <Brain className="text-purple-400" />, name: 'Problem Solving' },
+    { icon: <MessageCircle className="text-blue-400" />, name: 'Communication' },
+    { icon: <Users className="text-green-400" />, name: 'Team Collaboration' },
+    { icon: <Clock className="text-orange-400" />, name: 'Time Management' },
+    { icon: <RefreshCw className="text-cyan-400" />, name: 'Adaptability' },
+    { icon: <Lightbulb className="text-yellow-400" />, name: 'Critical Thinking' },
+    { icon: <Crown className="text-red-400" />, name: 'Leadership' },
+    { icon: <Sparkles className="text-pink-400" />, name: 'Creativity' },
   ];
 
   // Combine all skills, removing duplicates by name
@@ -100,7 +100,7 @@ const Skills = () => {
     ...technicalSkills.backend,
     ...technicalSkills.database,
     ...technicalSkills.tools,
-    ...technicalSkills.os, // Added OS skills
+    ...technicalSkills.os,
     ...technicalSkills.languages,
     ...softSkills,
   ];
@@ -122,9 +122,9 @@ const Skills = () => {
 
   const SkillCard = ({ skill }) => (
     <motion.div
-      className="bg-gray-800 rounded-xl flex flex-col items-center justify-center 
-               p-4 sm:p-6 shadow-lg border border-gray-700 transition-all 
-               hover:bg-gray-700 hover:border-blue-400"
+      className="bg-gray-900/50 rounded-xl flex flex-col items-center justify-center 
+               p-4 sm:p-6 shadow-lg border border-gray-800 transition-all 
+               hover:bg-gray-800/70 hover:border-purple-500/50 backdrop-blur-sm"
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4 }}
@@ -142,12 +142,11 @@ const Skills = () => {
     </motion.div>
   );
 
-
   return (
     <section
       id="skills"
       ref={skillsRef}
-      className="min-h-screen flex flex-col items-center justify-center py-20 bg-gray-950 px-4"
+      className="min-h-screen flex flex-col items-center justify-center py-20 bg-black px-4"
     >
       <div className="max-w-7xl w-full flex flex-col items-center">
         <motion.div
@@ -157,13 +156,16 @@ const Skills = () => {
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           <motion.h1
-            className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-br from-purple-600 to-blue-600 bg-clip-text text-transparent"
             initial={{ y: 20, opacity: 0 }}
             animate={isVisible ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           >
             Skills
           </motion.h1>
+          
+          {/* Gradient underline */}
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto rounded-full mb-8" />
 
           {/* 3-line Motivation */}
           <motion.p
@@ -183,10 +185,11 @@ const Skills = () => {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 border ${activeCategory === category.id
-                  ? 'bg-blue-500 text-white border-blue-500 shadow-lg shadow-blue-500/30'
-                  : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 hover:border-blue-300 hover:text-white'
-                }`}
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 border ${
+                activeCategory === category.id
+                  ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white border-transparent shadow-lg shadow-purple-500/30'
+                  : 'bg-gray-900/50 text-gray-300 border-gray-700 hover:bg-gray-800 hover:border-purple-500/50 hover:text-white backdrop-blur-sm'
+              }`}
             >
               {category.label}
             </button>

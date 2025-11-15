@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Home, User, GraduationCap, Code, Folder, Mail, ChevronsUp } from 'lucide-react';
+import { Home, User, GraduationCap, Code, Folder, Mail, ChevronsUp, Menu, X } from 'lucide-react';
 
 const DockNavbar = () => {
     const [activeItem, setActiveItem] = useState('home');
@@ -7,8 +7,10 @@ const DockNavbar = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, width: 0 });
     const [isDockVisible, setIsDockVisible] = useState(false);
     const [showScrollHint, setShowScrollHint] = useState(true);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dockRef = useRef(null);
     const triggerRef = useRef(null);
+    const mobileMenuRef = useRef(null);
     const scrollTimeoutRef = useRef(null);
 
     const navItems = [
@@ -51,10 +53,19 @@ const DockNavbar = () => {
             if (current) setActiveItem(current);
         };
 
+        const handleClickOutside = (event) => {
+            if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
         const hintTimeout = setTimeout(() => setShowScrollHint(false), 5000);
         window.addEventListener('scroll', handleScroll, { passive: true });
+        document.addEventListener('mousedown', handleClickOutside);
+        
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            document.removeEventListener('mousedown', handleClickOutside);
             clearTimeout(hintTimeout);
             clearTimeout(scrollTimeoutRef.current);
         };
@@ -70,6 +81,7 @@ const DockNavbar = () => {
 
     const scrollToSection = (href, itemId) => {
         setActiveItem(itemId);
+        setIsMobileMenuOpen(false);
         const element = document.querySelector(href);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -97,12 +109,71 @@ const DockNavbar = () => {
         }, 1000);
     };
 
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    // Desktop Dock Item
+    const DockItem = ({ item, index, isActive, scale }) => {
+        const Icon = item.icon;
+        return (
+            <button
+                onClick={() => scrollToSection(item.href, item.id)}
+                style={{ transform: `scale(${scale})` }}
+                className={`relative group flex flex-col items-center p-3 rounded-xl transition-all duration-300 ${
+                    isActive 
+                        ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-md shadow-purple-500/30' 
+                        : 'text-gray-200 hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:to-blue-600 hover:shadow-lg'
+                }`}
+            >
+                {isActive && (
+                    <>
+                        <div className="absolute inset-0 rounded-xl animate-pulse bg-purple-600/20" />
+                        <div className="absolute -top-1 w-1.5 h-1.5 rounded-full bg-purple-400" />
+                    </>
+                )}
+
+                <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'scale-100'}`}>
+                    <Icon size={20} className="relative z-10" />
+                </div>
+
+                <div className={`absolute -top-12 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none backdrop-blur-lg bg-gray-900/90 text-purple-300 shadow-lg`}>
+                    {item.label}
+                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45 bg-gray-900/90" />
+                </div>
+
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+            </button>
+        );
+    };
+
+    // Mobile Menu Item
+    const MobileMenuItem = ({ item, isActive }) => {
+        const Icon = item.icon;
+        return (
+            <button
+                onClick={() => scrollToSection(item.href, item.id)}
+                className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${
+                    isActive 
+                        ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-md shadow-purple-500/30' 
+                        : 'text-gray-200 hover:text-white hover:bg-gray-800/50'
+                }`}
+            >
+                <Icon size={20} className="flex-shrink-0" />
+                <span className="font-medium">{item.label}</span>
+                {isActive && (
+                    <div className="ml-auto w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                )}
+            </button>
+        );
+    };
+
     return (
         <>
             {/* Hidden Trigger */}
             <div
                 ref={triggerRef}
-                className="fixed bottom-0 left-0 right-0 h-12 z-40 cursor-pointer"
+                className="fixed bottom-0 left-0 right-0 h-12 z-40 cursor-pointer hidden lg:block"
                 onMouseEnter={handleDockInteraction}
                 onMouseLeave={(e) => {
                     if (!dockRef.current?.contains(e.relatedTarget)) {
@@ -112,11 +183,43 @@ const DockNavbar = () => {
             />
 
             {/* Animated Background Blob */}
-            <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${isDockVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-95'}`}>
-                <div className="w-80 h-20 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 blur-2xl rounded-full" />
+            <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 hidden lg:block ${
+                isDockVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-95'
+            }`}>
+                <div className="w-80 h-20 bg-gradient-to-r from-purple-600/30 to-blue-600/30 blur-2xl rounded-full" />
             </div>
 
-            {/* Main Dock */}
+            {/* Mobile Menu Button */}
+            <button
+                onClick={toggleMobileMenu}
+                className="fixed bottom-6 right-6 z-50 lg:hidden p-4 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/30 backdrop-blur-2xl border border-purple-500/30 transition-all duration-300 hover:scale-110"
+            >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* Mobile Menu */}
+            <div
+                ref={mobileMenuRef}
+                className={`fixed inset-x-4 bottom-20 z-50 lg:hidden transition-all duration-300 transform ${
+                    isMobileMenuOpen 
+                        ? 'opacity-100 scale-100 translate-y-0' 
+                        : 'opacity-0 scale-95 translate-y-4 pointer-events-none'
+                }`}
+            >
+                <div className="bg-gray-900/90 backdrop-blur-2xl rounded-2xl border border-gray-800 shadow-2xl shadow-black/30 p-4">
+                    <div className="grid gap-2">
+                        {navItems.map((item) => (
+                            <MobileMenuItem 
+                                key={item.id} 
+                                item={item} 
+                                isActive={activeItem === item.id} 
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop Dock */}
             <div
                 ref={dockRef}
                 onMouseMove={handleMouseMove}
@@ -124,44 +227,27 @@ const DockNavbar = () => {
                 onMouseLeave={(e) => {
                     if (!triggerRef.current?.contains(e.relatedTarget)) setIsDockVisible(false);
                 }}
-                className={`fixed left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${isDockVisible ? 'bottom-6 opacity-100 scale-100' : 'bottom-0 opacity-0 scale-95 -translate-y-4'}`}
+                className={`fixed left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out hidden lg:flex ${
+                    isDockVisible ? 'bottom-6 opacity-100 scale-100' : 'bottom-0 opacity-0 scale-95 -translate-y-4'
+                }`}
             >
-                <div className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-2xl border backdrop-blur-2xl transition-all duration-500 ${isScrolled ? 'bg-gray-900/80 border-gray-700 shadow-2xl shadow-black/20' : 'bg-gray-950/70 border-gray-800 shadow-2xl shadow-black/30'}`}>
-
+                <div className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-2xl border backdrop-blur-2xl transition-all duration-500 ${
+                    isScrolled 
+                        ? 'bg-gray-900/80 border-gray-800 shadow-2xl shadow-black/20' 
+                        : 'bg-black/70 border-gray-800 shadow-2xl shadow-black/30'
+                }`}>
                     {navItems.map((item, index) => {
-                        const Icon = item.icon;
                         const isActive = activeItem === item.id;
                         const scale = calculateItemScale(index, navItems.length);
-
+                        
                         return (
-                            <button
+                            <DockItem 
                                 key={item.id}
-                                onClick={() => scrollToSection(item.href, item.id)}
-                                style={{ transform: `scale(${scale})` }}
-                                className={`relative group flex flex-col items-center p-3 rounded-xl transition-all duration-300 ${
-                                    isActive 
-                                        ? 'bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 text-white shadow-md shadow-blue-500/30' 
-                                        : 'text-gray-200 hover:text-white hover:bg-gradient-to-r hover:from-blue-700 hover:via-blue-500 hover:to-cyan-400 hover:shadow-lg'
-                                }`}
-                            >
-                                {isActive && (
-                                    <>
-                                        <div className="absolute inset-0 rounded-xl animate-pulse bg-blue-600/20" />
-                                        <div className="absolute -top-1 w-1.5 h-1.5 rounded-full bg-blue-400" />
-                                    </>
-                                )}
-
-                                <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'scale-100'}`}>
-                                    <Icon size={20} className="relative z-10" />
-                                </div>
-
-                                <div className={`absolute -top-12 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none backdrop-blur-lg bg-gray-900/90 text-cyan-300 shadow-lg`}>
-                                    {item.label}
-                                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45 bg-gray-900/90" />
-                                </div>
-
-                                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                            </button>
+                                item={item}
+                                index={index}
+                                isActive={isActive}
+                                scale={scale}
+                            />
                         );
                     })}
                 </div>

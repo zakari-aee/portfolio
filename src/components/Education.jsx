@@ -57,20 +57,20 @@ const Education = () => {
         <section
             id="education"
             ref={educationRef}
-            className="min-h-screen flex flex-col items-center py-24 bg-gray-950 px-4 lg:px-20 text-white"
+            className="min-h-screen flex flex-col items-center py-24 bg-black px-4 lg:px-20 text-white"
         >
             {/* Section Title */}
             <motion.div
                 variants={titleVariant}
                 initial="hidden"
                 animate={isVisible ? "visible" : "hidden"}
-                className="flex items-center gap-3 mb-12"
+                className="text-center mb-16"
             >
-                <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-br from-purple-600 to-blue-600 bg-clip-text text-transparent">
                     Education
                 </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto rounded-full" />
             </motion.div>
-
 
             <div className="flex flex-col gap-10 w-full max-w-6xl">
                 {educationData.map((edu, index) => (
@@ -80,14 +80,14 @@ const Education = () => {
                         initial="hidden"
                         animate={isVisible ? "visible" : "hidden"}
                         transition={{ delay: 0.1 + index * 0.15 }} // shorter delay
-                        className="relative flex flex-col md:flex-row bg-gray-800/50 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl hover:bg-gray-800/70 transition-all duration-500 border border-gray-700/50"
+                        className="relative flex flex-col md:flex-row bg-gray-900/50 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:bg-gray-900/70 transition-all duration-500 border border-gray-800 backdrop-blur-sm"
                     >
                         <div className="relative w-full md:w-96 h-48 md:h-auto flex-shrink-0">
                             <img src={edu.image} alt={edu.school} className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-5">
                                 <h3 className="text-2xl font-bold text-white mb-2">{edu.school}</h3>
                                 <div className="flex items-center gap-2 text-gray-300 text-sm mb-1">
-                                    <MapPin className="w-4 h-4 text-blue-400" />
+                                    <MapPin className="w-4 h-4 text-purple-400" />
                                     <span>{edu.location}</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-gray-300 text-sm">
@@ -99,11 +99,11 @@ const Education = () => {
 
                         <div className="flex flex-col p-6 gap-4 w-full">
                             <div className="flex items-center gap-3">
-                                <BookOpen className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                                <BookOpen className="w-5 h-5 text-purple-400 flex-shrink-0" />
                                 <h4 className="text-xl font-semibold text-white">{edu.degree}</h4>
                             </div>
                             <div className="flex items-start gap-3 text-gray-300">
-                                <Award className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-1" />
+                                <Award className="w-5 h-5 text-blue-400 flex-shrink-0 mt-1" />
                                 <p className="text-base leading-relaxed">{edu.grade}</p>
                             </div>
                             <div className="flex items-start gap-3 text-gray-400">
@@ -114,7 +114,7 @@ const Education = () => {
                                 {edu.coursework.map(course => (
                                     <span
                                         key={course}
-                                        className="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-xs font-medium border border-blue-700/50"
+                                        className="px-3 py-1 bg-gradient-to-br from-purple-600/20 to-blue-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-500/30"
                                     >
                                         {course}
                                     </span>
