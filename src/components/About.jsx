@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -46,7 +46,7 @@ const About = () => {
 
                         <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
 
-                            {/* PHOTO - LEFT */}
+                            {/* PHOTO */}
                             <motion.div
                                 initial={{ opacity: 0, x: -40 }}
                                 animate={isVisible ? { opacity: 1, x: 0 } : {}}
@@ -70,7 +70,7 @@ const About = () => {
                                 </motion.div>
                             </motion.div>
 
-                            {/* TEXT - RIGHT */}
+                            {/* TEXT */}
                             <motion.div
                                 className="flex-1 space-y-5 text-left"
                                 initial={{ opacity: 0, x: 40 }}
@@ -83,52 +83,43 @@ const About = () => {
 
                                 <p className="text-gray-300 leading-relaxed text-lg">
                                     A passionate <span className="text-blue-400 font-semibold">Full-Stack Developer</span>
-                                    from the beautiful city of Meknes, Morocco. I fell in love with coding during my early college years
-                                    and have been on an incredible journey of learning and growth ever since.
+                                    from Meknes, Morocco. I started coding in early college and have been on an amazing
+                                    journey of growth ever since.
                                 </p>
 
                                 <p className="text-gray-300 leading-relaxed text-lg">
-                                    What drives me is the ability to
-                                    <span className="text-blue-400 font-semibold"> transform ideas into digital reality</span>.
-                                    There's something magical about writing code that solves real problems
-                                    and improves people's lives.
+                                    I love turning ideas into real applications that solve problems and help people.
                                 </p>
 
                                 <p className="text-gray-300 leading-relaxed text-lg">
-                                    When I'm not coding, I'm exploring new technologies, contributing to open-source,
-                                    or enjoying Moroccan tea while planning new projects. I believe in
-                                    <span className="text-blue-400 font-semibold"> continuous learning</span>
-                                    and the power of collaboration.
+                                    When I’m not coding, I explore new tools, contribute to open-source,
+                                    and enjoy Moroccan tea while planning new projects.
                                 </p>
 
                                 <p className="text-gray-300 leading-relaxed text-lg">
-                                    I specialize in <span className="text-green-400 font-semibold">React</span>,
+                                    I specialize in:
+                                    <span className="text-green-400 font-semibold"> React</span>,
                                     <span className="text-green-400 font-semibold"> Node.js</span>,
-                                    and <span className="text-green-400 font-semibold">Python</span>,
-                                    building scalable, maintainable applications.
+                                    <span className="text-green-400 font-semibold"> Python</span>.
                                 </p>
+
+                                {/* EDUCATION BUTTON INSIDE THE CARD NOW */}
+                                <motion.a
+                                    href="#education"
+                                    className="mt-6 px-8 py-4 bg-transparent border border-white/20 text-white rounded-full 
+                                    text-lg font-medium flex items-center gap-3 justify-center hover:bg-white/10 
+                                    transition-all duration-300 w-full md:w-fit"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <GraduationCap className="w-6 h-6 text-blue-400" />
+                                    Discover My Educational Journey
+                                </motion.a>
                             </motion.div>
                         </div>
                     </div>
-
-                    {/* Education Button */}
-                    <motion.div
-                        className="text-center mt-12"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                    >
-                        <motion.a
-                            href="#education"
-                            className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-cyan-500/50 text-white rounded-2xl text-lg font-semibold hover:from-blue-600/30 hover:to-cyan-600/30 transition-all duration-300"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Discover My Educational Journey
-                            <ArrowRight className="w-5 h-5" />
-                        </motion.a>
-                    </motion.div>
                 </motion.div>
+
             </div>
         </section>
     );
