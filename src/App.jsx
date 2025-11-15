@@ -1,3 +1,4 @@
+import React from 'react';
 import DockNavbar from './components/DockNavbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -6,14 +7,12 @@ import Projects from './components/Projects';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       <DockNavbar />
-      <div className="pb-32">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-      </div>
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
     </div>
   );
 }

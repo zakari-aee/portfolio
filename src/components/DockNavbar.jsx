@@ -1,12 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import {
-    Home,
-    User,
-    Code,
-    Folder,
-    Mail,
-    ChevronsUp
-} from 'lucide-react';
+import { Home, User, Code, Folder, Mail, ChevronsUp } from 'lucide-react';
 
 const DockNavbar = () => {
     const [activeItem, setActiveItem] = useState('home');
@@ -32,12 +25,9 @@ const DockNavbar = () => {
             const isScrolling = scrollY > 50;
             setIsScrolled(isScrolling);
 
-            // Show dock when user scrolls
             if (isScrolling) {
                 setIsDockVisible(true);
                 setShowScrollHint(false);
-
-                // Auto-hide after 3 seconds of no scrolling
                 clearTimeout(scrollTimeoutRef.current);
                 scrollTimeoutRef.current = setTimeout(() => {
                     if (!dockRef.current?.matches(':hover') && !triggerRef.current?.matches(':hover')) {
@@ -59,11 +49,7 @@ const DockNavbar = () => {
             if (current) setActiveItem(current);
         };
 
-        // Hide scroll hint after 5 seconds
-        const hintTimeout = setTimeout(() => {
-            setShowScrollHint(false);
-        }, 5000);
-
+        const hintTimeout = setTimeout(() => setShowScrollHint(false), 5000);
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -74,11 +60,9 @@ const DockNavbar = () => {
 
     const handleMouseMove = (e) => {
         if (!dockRef.current) return;
-
         const dockRect = dockRef.current.getBoundingClientRect();
         const x = e.clientX - dockRect.left;
         const width = dockRect.width;
-
         setMousePosition({ x, width });
     };
 
@@ -86,21 +70,16 @@ const DockNavbar = () => {
         setActiveItem(itemId);
         const element = document.querySelector(href);
         if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 
     const calculateItemScale = (index, totalItems) => {
         if (!mousePosition.width || !isDockVisible) return 1;
-
         const itemWidth = mousePosition.width / totalItems;
         const itemCenter = (index * itemWidth) + (itemWidth / 2);
         const distance = Math.abs(mousePosition.x - itemCenter);
         const maxDistance = mousePosition.width / 2;
-
         const scale = 1 + (0.3 * (1 - Math.min(distance / maxDistance, 1)));
         return Math.max(1, scale);
     };
@@ -108,8 +87,6 @@ const DockNavbar = () => {
     const handleDockInteraction = () => {
         setIsDockVisible(true);
         setShowScrollHint(false);
-
-        // Reset auto-hide timer
         clearTimeout(scrollTimeoutRef.current);
         scrollTimeoutRef.current = setTimeout(() => {
             if (!dockRef.current?.matches(':hover') && !triggerRef.current?.matches(':hover')) {
@@ -120,7 +97,7 @@ const DockNavbar = () => {
 
     return (
         <>
-            {/* Hidden Trigger Area - Bottom 50px of screen */}
+            {/* Hidden Trigger */}
             <div
                 ref={triggerRef}
                 className="fixed bottom-0 left-0 right-0 h-12 z-40 cursor-pointer"
@@ -132,14 +109,9 @@ const DockNavbar = () => {
                 }}
             />
 
-
-
             {/* Animated Background Blob */}
-            <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${isDockVisible
-                ? 'opacity-40 scale-100'
-                : 'opacity-0 scale-95'
-                } ${isScrolled ? 'opacity-20' : 'opacity-40'}`}>
-                <div className="w-64 h-20 bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-2xl rounded-full" />
+            <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${isDockVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-95'}`}>
+                <div className="w-64 h-20 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 blur-2xl rounded-full" />
             </div>
 
             {/* Main Dock */}
@@ -148,21 +120,12 @@ const DockNavbar = () => {
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleDockInteraction}
                 onMouseLeave={(e) => {
-                    if (!triggerRef.current?.contains(e.relatedTarget)) {
-                        setIsDockVisible(false);
-                    }
+                    if (!triggerRef.current?.contains(e.relatedTarget)) setIsDockVisible(false);
                 }}
-                className={`fixed left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${isDockVisible
-                    ? 'bottom-6 opacity-100 scale-100'
-                    : 'bottom-0 opacity-0 scale-95 -translate-y-4'
-                    }`}
+                className={`fixed left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${isDockVisible ? 'bottom-6 opacity-100 scale-100' : 'bottom-0 opacity-0 scale-95 -translate-y-4'}`}
             >
-                <div className={`flex items-center justify-center space-x-2 px-8 py-4 rounded-2xl border backdrop-blur-2xl transition-all duration-500 ${isScrolled
-                    ? 'bg-white/95 border-gray-200/60 shadow-2xl shadow-black/10'
-                    : 'bg-black/50 border-white/25 shadow-2xl shadow-black/30'
-                    }`}>
+                <div className={`flex items-center justify-center space-x-2 px-8 py-4 rounded-2xl border backdrop-blur-2xl transition-all duration-500 ${isScrolled ? 'bg-gray-900/80 border-gray-700 shadow-2xl shadow-black/20' : 'bg-gray-950/70 border-gray-800 shadow-2xl shadow-black/30'}`}>
 
-                    {/* Navigation Items with Magnetic Effect */}
                     {navItems.map((item, index) => {
                         const Icon = item.icon;
                         const isActive = activeItem === item.id;
@@ -173,43 +136,29 @@ const DockNavbar = () => {
                                 key={item.id}
                                 onClick={() => scrollToSection(item.href, item.id)}
                                 style={{ transform: `scale(${scale})` }}
-                                className={`relative group flex flex-col items-center p-3 rounded-xl transition-all duration-300 ${isActive
-                                    ? isScrolled
-                                        ? 'bg-blue-50 text-blue-600 shadow-md shadow-blue-500/20'
-                                        : 'bg-white/25 text-white shadow-md shadow-white/20'
-                                    : isScrolled
-                                        ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/80'
-                                        : 'text-white/80 hover:text-white hover:bg-white/15'
-                                    }`}
+                                className={`relative group flex flex-col items-center p-3 rounded-xl transition-all duration-300 ${
+                                    isActive 
+                                        ? 'bg-cyan-600/30 text-cyan-400 shadow-md shadow-cyan-500/20' 
+                                        : 'text-cyan-200/80 hover:text-cyan-400 hover:bg-cyan-500/10'
+                                }`}
                             >
-                                {/* Active Pulse Effect */}
                                 {isActive && (
                                     <>
-                                        <div className={`absolute inset-0 rounded-xl animate-pulse ${isScrolled ? 'bg-blue-100' : 'bg-white/20'
-                                            }`} />
-                                        <div className={`absolute -top-1 w-1.5 h-1.5 rounded-full ${isScrolled ? 'bg-blue-600' : 'bg-white'
-                                            }`} />
+                                        <div className="absolute inset-0 rounded-xl animate-pulse bg-cyan-600/20" />
+                                        <div className="absolute -top-1 w-1.5 h-1.5 rounded-full bg-cyan-400" />
                                     </>
                                 )}
 
-                                {/* Icon with Bounce Animation */}
-                                <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'scale-100'
-                                    }`}>
+                                <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'scale-100'}`}>
                                     <Icon size={22} className="relative z-10" />
                                 </div>
 
-                                {/* Enhanced Tooltip */}
-                                <div className={`absolute -top-12 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none backdrop-blur-lg ${isScrolled
-                                    ? 'bg-gray-900/95 text-white shadow-lg'
-                                    : 'bg-white/95 text-gray-900 shadow-lg'
-                                    }`}>
+                                <div className={`absolute -top-12 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none backdrop-blur-lg bg-gray-900/90 text-cyan-300 shadow-lg`}>
                                     {item.label}
-                                    <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45 ${isScrolled ? 'bg-gray-900/95' : 'bg-white/95'
-                                        }`} />
+                                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45 bg-gray-900/90" />
                                 </div>
 
-                                {/* Hover Background Effect */}
-                                <div className={`absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`} />
+                                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                             </button>
                         );
                     })}
