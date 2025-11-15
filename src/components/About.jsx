@@ -72,7 +72,7 @@ const About = () => {
                         transition={{ ...transition, delay: 0.1 }}
                         className="text-left"
                     >
-                        <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-800 via-purple-400 to-cyan-430 bg-clip-text text-transparent">
+                        <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                             About Me
                         </h2>
                         <p className="text-xl md:text-2xl text-gray-400 mt-2">Zakariae Alliouate</p>

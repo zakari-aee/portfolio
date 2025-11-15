@@ -58,7 +58,9 @@ const Hero = () => {
 					transition={{ duration: 0.8 }}
 				>
 					<h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-white">ZAKARIAE</h1>
-					<h1 className="text-6xl md:text-7xl font-black mb-4 bg-gradient-to-r from-blue-800 via-purple-400 to-cyan-430 bg-clip-text text-transparent">ALLIOUATE</h1>
+					<h1 className="text-6xl md:text-7xl font-black mb-4 bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+						ALLIOUATE
+					</h1>
 				</motion.div>
 
 				{/* Tagline */}

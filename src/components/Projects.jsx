@@ -47,7 +47,7 @@ const Projects = () => {
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           <motion.h2
-            className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-800 via-purple-400 to-blue-800 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-800 via-blue-500 to-cyan-400 bg-clip-text text-transparent"
             initial={{ y: 20, opacity: 0 }}
             animate={isVisible ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
