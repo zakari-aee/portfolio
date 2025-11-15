@@ -60,11 +60,10 @@ export default function Hero() {
               <div key={i} className="mx-6 flex-shrink-0">
                 <img
                   src={logo}
-                  className="h-12 w-12 object-contain filter brightness-0 invert" // Makes logos white
+                  className="h-12 w-12 object-contain filter brightness-0 invert"
                   draggable="false"
                   alt="Skill icon"
                   onError={(e) => {
-                    // Fallback if image fails to load
                     e.target.style.display = 'none';
                   }}
                 />
@@ -86,9 +85,9 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="flex gap-4 sm:gap-8 text-sm justify-center mt-10 flex-wrap">
+        <div className="flex gap-4 sm:gap-8 text-sm justify-center mt-10 flex-wrap items-center">
           <a
-            href="mailto:yourmail@gmail.com"
+            href="mailto:zakariaealliouate@gmail.com"
             className="relative group inline-flex items-center justify-center w-full sm:w-[180px] overflow-hidden rounded-xl px-[2px] py-[2px] bg-gradient-to-br from-purple-600/70 to-blue-600/70 shadow-[0_0_25px_rgba(124,58,237,0.5)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(99,102,241,0.9)]"
           >
             <span className="w-full h-full rounded-xl bg-black/60 backdrop-blur-xl text-white font-semibold text-md py-2 flex items-center justify-center transition-all duration-300 group-hover:bg-black/40">
@@ -96,15 +95,42 @@ export default function Hero() {
             </span>
           </a>
 
-          <a
-            href="https://github.com"
-            target="_blank"
-            className="relative group inline-flex items-center justify-center w-full sm:w-[180px] rounded-xl p-[2px] overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 transition-all duration-500 hover:from-pink-500 hover:to-orange-400 shadow-[0_0_25px_rgba(124,58,237,0.5)] hover:shadow-[0_0_35px_rgba(249,115,22,0.9)]"
-          >
-            <span className="w-full h-full bg-black rounded-xl text-white py-2 font-semibold text-md flex items-center justify-center transition-all duration-500 group-hover:bg-black/40">
-              Github
-            </span>
-          </a>
+          {/* Simple Logo Buttons */}
+          <div className="flex gap-4">
+            <a
+              href="https://github.com/zakari-aee"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-900/50 border border-gray-800 backdrop-blur-sm transition-all duration-300 hover:bg-purple-600/20 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v11/icons/github.svg"
+                className="w-6 h-6 object-contain filter brightness-0 invert transition-all duration-300 group-hover:scale-110"
+                alt="GitHub"
+                onError={(e) => {
+                  console.log('GitHub logo failed to load');
+                }}
+              />
+            </a>
+
+            <a
+              href="https://linkedin.com/in/zakariae-alliouate"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gray-900/50 border border-gray-800 backdrop-blur-sm transition-all duration-300 hover:bg-blue-600/20 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v11/icons/linkedin.svg"
+                className="w-6 h-6 object-contain filter brightness-0 invert transition-all duration-300 group-hover:scale-110"
+                alt="LinkedIn"
+                onError={(e) => {
+                  console.log('LinkedIn logo failed to load');
+                  // Fallback: try a different CDN
+                  e.target.src = "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg";
+                }}
+              />
+            </a>
+          </div>
         </div>
       </div>
 
