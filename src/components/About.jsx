@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Code2, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -16,46 +16,67 @@ const About = () => {
     }, []);
 
     return (
-        <section id="about" ref={aboutRef} className="min-h-screen flex flex-col items-center py-24 bg-gray-950 px-4 lg:px-20 text-white"
+        <section
+            id="about"
+            ref={aboutRef}
+            className="min-h-screen flex flex-col items-center py-24 bg-gray-950 px-4 lg:px-20 text-white"
         >
             <div className="max-w-6xl w-full">
 
                 {/* Header */}
                 <motion.div
                     className="text-center mb-16"
-                    initial={{ opacity: 0 }}
-                    animate={isVisible ? { opacity: 1 } : {}}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-5xl md:text-6xl font-black mb-6 text-center bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+                    <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
                         About Me
                     </h2>
                     <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full" />
                 </motion.div>
 
-                {/* Main Row → Photo Left / Text Right */}
+                {/* Main Row */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={isVisible ? { opacity: 1 } : {}}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
                 >
                     <div className="bg-gray-900/50 rounded-3xl p-10 border border-gray-800 backdrop-blur-sm">
 
                         <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
 
                             {/* PHOTO - LEFT */}
-                            <div className="flex-shrink-0">
-                                <div className="w-56 h-56 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 p-1.5">
+                            <motion.div
+                                initial={{ opacity: 0, x: -40 }}
+                                animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                                transition={{ duration: 0.7, ease: "easeOut" }}
+                                className="flex-shrink-0"
+                            >
+                                <motion.div
+                                    animate={{ y: [0, -6, 0] }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="w-56 h-56 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 p-1.5"
+                                >
                                     <img
                                         src="/me.png"
                                         alt="Zakariae Alliouate - Full Stack Developer"
                                         className="w-full h-full rounded-full object-cover border-2 border-white/20 shadow-xl"
                                     />
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
 
                             {/* TEXT - RIGHT */}
-                            <div className="flex-1 space-y-5 text-left">
+                            <motion.div
+                                className="flex-1 space-y-5 text-left"
+                                initial={{ opacity: 0, x: 40 }}
+                                animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                                transition={{ duration: 0.7, ease: "easeOut" }}
+                            >
                                 <h3 className="text-3xl font-bold text-white">
                                     Hello, I'm <span className="text-blue-400">Zakariae Alliouate</span>
                                 </h3>
@@ -86,17 +107,19 @@ const About = () => {
                                     and <span className="text-green-400 font-semibold">Python</span>,
                                     building scalable, maintainable applications.
                                 </p>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
 
                     {/* Education Button */}
-                    <motion.div className="text-center mt-12"
+                    <motion.div
+                        className="text-center mt-12"
                         initial={{ opacity: 0, y: 20 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                        <motion.a href="#education"
+                        <motion.a
+                            href="#education"
                             className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-cyan-500/50 text-white rounded-2xl text-lg font-semibold hover:from-blue-600/30 hover:to-cyan-600/30 transition-all duration-300"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}

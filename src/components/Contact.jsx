@@ -27,11 +27,11 @@ const Contact = () => {
     }, []);
 
     const contactInfo = {
-        email: 'zakariae.alliouate@example.com',
+        email: 'zakariaealliouate@gmail.com',
         location: 'Meknes, Morocco',
         timeZone: 'WEST (UTC+1) / GMT+1',
-        github: 'https://github.com/yourusername',
-        linkedin: 'https://linkedin.com/in/yourprofile',
+        github: 'https://github.com/zakari-aee',
+        linkedin: 'https://linkedin.com/in/zakariae-alliouate',
     };
 
     const officeHours = [
