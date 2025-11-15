@@ -11,12 +11,12 @@ import {
   FaCode,
   FaWindows,
 } from 'react-icons/fa';
-import { 
-  SiTailwindcss, 
-  SiPostgresql, 
-  SiMongodb, 
-  SiMysql, 
-  SiVim, 
+import {
+  SiTailwindcss,
+  SiPostgresql,
+  SiMongodb,
+  SiMysql,
+  SiVim,
   SiApple,
   SiArchlinux,
   SiVirtualbox
@@ -122,16 +122,26 @@ const Skills = () => {
 
   const SkillCard = ({ skill }) => (
     <motion.div
-      className="bg-gray-800 rounded-2xl flex flex-col items-center justify-center p-6 shadow-lg border border-gray-700 transition-all hover:bg-gray-700 hover:border-blue-400 hover:scale-105"
+      className="bg-gray-800 rounded-xl flex flex-col items-center justify-center 
+               p-4 sm:p-6 shadow-lg border border-gray-700 transition-all 
+               hover:bg-gray-700 hover:border-blue-400"
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4 }}
       whileHover={{ scale: 1.05 }}
     >
-      <div className="text-5xl mb-4">{skill.icon}</div>
-      <p className="text-white text-base font-medium text-center">{skill.name}</p>
+      {/* Icon size: smaller on mobile */}
+      <div className="text-3xl sm:text-5xl mb-2 sm:mb-4">
+        {skill.icon}
+      </div>
+
+      {/* Text size: smaller on mobile */}
+      <p className="text-white text-sm sm:text-base font-medium text-center">
+        {skill.name}
+      </p>
     </motion.div>
   );
+
 
   return (
     <section
@@ -173,11 +183,10 @@ const Skills = () => {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 border ${
-                activeCategory === category.id
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-200 border ${activeCategory === category.id
                   ? 'bg-blue-500 text-white border-blue-500 shadow-lg shadow-blue-500/30'
                   : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 hover:border-blue-300 hover:text-white'
-              }`}
+                }`}
             >
               {category.label}
             </button>

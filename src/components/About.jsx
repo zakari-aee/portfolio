@@ -82,8 +82,8 @@ const About = () => {
                                 </h3>
 
                                 <p className="text-gray-300 leading-relaxed text-lg">
-                                    A passionate <span className="text-blue-400 font-semibold">Full-Stack Developer</span>
-                                    from Meknes, Morocco. I started coding in early college and have been on an amazing
+                                    A passionate <span className="text-blue-400 font-semibold"> Full-Stack Developer , </span>
+                                     from Meknes, Morocco. I started coding in early college and have been on an amazing
                                     journey of growth ever since.
                                 </p>
 
