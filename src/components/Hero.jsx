@@ -57,7 +57,7 @@ export default function Hero() {
         <div className="mt-12 overflow-hidden relative w-full before:absolute before:left-0 before:top-0 before:w-20 before:h-full before:bg-gradient-to-r before:from-black before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:w-20 after:h-full after:bg-gradient-to-l after:from-black after:to-transparent after:z-10">
 
           <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap items-center">
-            
+
             {skills.map((logo, i) => (
               <div key={i} className="mx-6 flex-shrink-0">
                 <img
@@ -83,14 +83,16 @@ export default function Hero() {
 
           {/* Download CV Button */}
           <a
-            href="/Zakariae-Alliouate-CV.pdf"
-            download
+            href="/zakariaeCV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="relative group inline-flex items-center justify-center w-full sm:w-[180px] overflow-hidden rounded-xl px-[2px] py-[2px] bg-gradient-to-br from-purple-600/70 to-blue-600/70 shadow-[0_0_25px_rgba(124,58,237,0.5)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(99,102,241,0.9)]"
           >
             <span className="w-full h-full rounded-xl bg-black/60 backdrop-blur-xl text-white font-semibold text-md py-2 flex items-center justify-center transition-all duration-300 group-hover:bg-black/40">
-              Download CV
+              View CV
             </span>
           </a>
+
 
           {/* Simple Logo Buttons */}
           <div className="flex gap-4">
