@@ -29,7 +29,7 @@ It demonstrates my ability to create modern web applications using **HTML, CSS, 
 
 ## 🚀 Preview
 
-You can check the live portfolio here: [Live Demo](https://your-portfolio-link.com)  
+You can check the live portfolio here: [Live Demo](https://zakariaealliouate.vercel.app)  
 
 ---
 
