@@ -35,4 +35,4 @@ You can check the live portfolio here: [Live Demo](https://zakariaealliouate.ver
 
 # My Project
 
-!![Project Screenshot](https://raw.githubusercontent.com/zakari-aee/portfolio/main/public/pic.png)
+[Project Screenshot](https://raw.githubusercontent.com/zakari-aee/portfolio/main/public/pic.png)
