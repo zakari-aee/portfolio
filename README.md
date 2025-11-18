@@ -33,5 +33,7 @@ You can check the live portfolio here: [Live Demo](https://your-portfolio-link.c
 
 ---
 
-## 🖥 Project Structure
+# My Project
+
+![Screenshot](images/screenshot.png)
 
