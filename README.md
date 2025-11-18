@@ -35,5 +35,4 @@ You can check the live portfolio here: [Live Demo](https://your-portfolio-link.c
 
 # My Project
 
-![Screenshot](images/screenshot.png)
-
+!![Project Screenshot](https://raw.githubusercontent.com/zakari-aee/portfolio/main/public/pic.png)
