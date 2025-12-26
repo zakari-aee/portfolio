@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin, BookOpen, Award, FileText } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const Education = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -11,45 +11,38 @@ const Education = () => {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting && !isVisible) setIsVisible(true);
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
             },
-            { threshold: 0 } // Trigger immediately when any part is visible
+            { threshold: 0.1 }
         );
 
         if (educationRef.current) observer.observe(educationRef.current);
-        return () => educationRef.current && observer.unobserve(educationRef.current);
-    }, [isVisible]);
-
-    const titleVariant = {
-        hidden: { opacity: 0, y: -20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-    };
-
-    const cardVariant = (direction = 'left') => ({
-        hidden: { opacity: 0, x: direction === 'left' ? -30 : 30 }, // smaller offset
-        visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-    });
+        return () => observer.disconnect();
+    }, []);
 
     const educationData = [
-        {
-            school: "OFPPT Meknes",
-            location: "Meknes, Morocco",
-            duration: "2023 - 2025",
-            degree: "Full-Stack Web Development",
-            grade: "Learned all Full-Stack languages",
-            image: "/ofppt.png",
-            coursework: ["Python", "POO", "JavaScript", "React", "Node.js", "PHP", "MySQL", "Laravel"],
-            description: "Studied for 2 years at OFPPT Meknes, acquiring solid skills in full-stack web development."
-        },
         {
             school: "1337 UM6P",
             location: "Rabat, Morocco",
             duration: "2025 - Present",
-            degree: "Software Engineering & Problem Solving",
-            grade: "Learned C, Git, Vim, and advanced problem solving",
-            image: "/1337.png",
-            coursework: ["Problem Solving", "C Programming", "Algorithms", "Git", "Vim"],
-            description: "Enhanced problem-solving skills and deepened knowledge of C programming and Git."
+            degree: "Software Engineering",
+            specialization: "Peer-to-Peer Learning Model",
+            description: "An immersive, project-based curriculum focused on low-level programming, algorithms, and system architecture. Developing resilience and autonomy through the 'Piscine' and core curriculum.",
+            tags: ["C Programming", "Unix/Linux", "Algorithms", "Git", "Shell", "Memory Management"],
+            color: "text-purple-400"
+        },
+        {
+            school: "OFPPT Meknes",
+            location: "Meknes, Morocco",
+            duration: "2023 - 2025",
+            degree: "Full-Stack Development",
+            specialization: "Specialized Technician Diploma",
+            description: "Comprehensive training in modern web technologies. Graduated with a strong foundation in both frontend interfaces and backend database management.",
+            tags: ["React", "Laravel", "Python", "MySQL", "JavaScript", "REST APIs"],
+            color: "text-blue-400"
         }
     ];
 
@@ -57,72 +50,116 @@ const Education = () => {
         <section
             id="education"
             ref={educationRef}
-            className="min-h-screen flex flex-col items-center py-24 bg-black px-4 lg:px-20 text-white"
+            className="min-h-screen flex flex-col justify-center py-24 bg-neutral-950 relative overflow-hidden"
         >
-            {/* Section Title */}
-            <motion.div
-                variants={titleVariant}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-                className="text-center mb-16"
-            >
-                <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-br from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    Education
-                </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto rounded-full" />
-            </motion.div>
+            {/* Background Decorations (Consistent with About) */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+                <div className="absolute top-[20%] right-[10%] w-72 h-72 bg-purple-900/10 rounded-full blur-[80px]" />
+                <div className="absolute bottom-[20%] left-[10%] w-72 h-72 bg-blue-900/10 rounded-full blur-[80px]" />
+            </div>
 
-            <div className="flex flex-col gap-10 w-full max-w-6xl">
-                {educationData.map((edu, index) => (
-                    <motion.div
-                        key={edu.school}
-                        variants={cardVariant(index % 2 === 0 ? 'left' : 'right')}
-                        initial="hidden"
-                        animate={isVisible ? "visible" : "hidden"}
-                        transition={{ delay: 0.1 + index * 0.15 }} // shorter delay
-                        className="relative flex flex-col md:flex-row bg-gray-900/50 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:bg-gray-900/70 transition-all duration-500 border border-gray-800 backdrop-blur-sm"
-                    >
-                        <div className="relative w-full md:w-96 h-48 md:h-auto flex-shrink-0">
-                            <img src={edu.image} alt={edu.school} className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-black/50 flex flex-col justify-end p-5">
-                                <h3 className="text-2xl font-bold text-white mb-2">{edu.school}</h3>
-                                <div className="flex items-center gap-2 text-gray-300 text-sm mb-1">
-                                    <MapPin className="w-4 h-4 text-purple-400" />
-                                    <span>{edu.location}</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-gray-300 text-sm">
-                                    <Calendar className="w-4 h-4 text-blue-400" />
-                                    <span>{edu.duration}</span>
-                                </div>
-                            </div>
-                        </div>
+            <div className="container mx-auto px-4 md:px-10 lg:px-20 relative z-10">
+                
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="mb-20 max-w-3xl"
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="w-12 h-[1px] bg-blue-500"></span>
+                        <span className="text-blue-400 font-medium tracking-wider uppercase text-sm">Academic Path</span>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Education & <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
+                            Certifications.
+                        </span>
+                    </h2>
+                    <p className="text-gray-400 text-lg leading-relaxed">
+                        My academic journey has been driven by a desire to understand the core machinery of software, 
+                        moving from high-level web frameworks down to low-level system architecture.
+                    </p>
+                </motion.div>
 
-                        <div className="flex flex-col p-6 gap-4 w-full">
-                            <div className="flex items-center gap-3">
-                                <BookOpen className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                                <h4 className="text-xl font-semibold text-white">{edu.degree}</h4>
-                            </div>
-                            <div className="flex items-start gap-3 text-gray-300">
-                                <Award className="w-5 h-5 text-blue-400 flex-shrink-0 mt-1" />
-                                <p className="text-base leading-relaxed">{edu.grade}</p>
-                            </div>
-                            <div className="flex items-start gap-3 text-gray-400">
-                                <FileText className="w-5 h-5 text-gray-500 flex-shrink-0 mt-1" />
-                                <p className="text-sm md:text-base leading-relaxed">{edu.description}</p>
-                            </div>
-                            <div className="flex flex-wrap gap-2 pt-2">
-                                {edu.coursework.map(course => (
-                                    <span
-                                        key={course}
-                                        className="px-3 py-1 bg-gradient-to-br from-purple-600/20 to-blue-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-500/30"
-                                    >
-                                        {course}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
+                {/* Timeline Grid */}
+                <div className="relative">
+                    {/* Vertical Line (Desktop only) */}
+                    <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-[1px] bg-gradient-to-b from-purple-500/50 via-blue-500/50 to-transparent hidden md:block" />
+
+                    <div className="space-y-12 md:space-y-0">
+                        {educationData.map((edu, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                                transition={{ duration: 0.5, delay: index * 0.2 }}
+                                className={`flex flex-col md:flex-row gap-8 md:gap-0 ${
+                                    index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                                }`}
+                            >
+                                {/* Empty side for timeline alignment */}
+                                <div className="hidden md:block w-1/2" />
+
+                                {/* Center Point */}
+                                <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-neutral-950 border border-white/20 z-10 mt-1 md:mt-0">
+                                    <div className="w-2 h-2 rounded-full bg-purple-500" />
+                                </div>
+
+                                {/* Content Card */}
+                                <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${
+                                    index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'
+                                }`}>
+                                    <div className="group relative p-6 sm:p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                                        
+                                        {/* Glow effect on hover */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+
+                                        <div className="relative z-10">
+                                            {/* Top Row: Year & Location */}
+                                            <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-medium">
+                                                    <Calendar className="w-3 h-3" />
+                                                    {edu.duration}
+                                                </span>
+                                                <span className="flex items-center gap-1 text-gray-400 text-xs uppercase tracking-wider">
+                                                    <MapPin className="w-3 h-3" />
+                                                    {edu.location}
+                                                </span>
+                                            </div>
+
+                                            {/* School & Degree */}
+                                            <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">
+                                                {edu.school}
+                                            </h3>
+                                            <div className={`text-sm font-medium mb-4 ${edu.color}`}>
+                                                {edu.degree} • {edu.specialization}
+                                            </div>
+
+                                            {/* Description */}
+                                            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                                                {edu.description}
+                                            </p>
+
+                                            {/* Tags */}
+                                            <div className="flex flex-wrap gap-2">
+                                                {edu.tags.map((tag) => (
+                                                    <span 
+                                                        key={tag} 
+                                                        className="px-2.5 py-1 rounded-md bg-black/40 border border-white/5 text-gray-300 text-xs hover:border-white/10 transition-colors"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );
