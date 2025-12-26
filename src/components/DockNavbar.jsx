@@ -6,10 +6,8 @@ import { Home, User, GraduationCap, Code, Folder, Mail, ArrowUp, Menu, X } from 
 
 const DockNavbar = () => {
   const [activeItem, setActiveItem] = useState('home');
-  const [isDockVisible, setIsDockVisible] = useState(true); // Default to visible for cleaner UX
+  const [isDockVisible, setIsDockVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const dockRef = useRef(null);
-  const mobileMenuRef = useRef(null);
 
   const navItems = [
     { id: 'home', label: 'Home', icon: Home, href: '#home' },
@@ -22,9 +20,7 @@ const DockNavbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Auto-hide dock if at the very top, or keep it subtle
       setIsDockVisible(window.scrollY > 20);
-
       const sections = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
       let currentSection = 'home';
       for (let section of sections) {
@@ -72,15 +68,15 @@ const DockNavbar = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="fixed inset-x-6 bottom-24 z-[90] lg:hidden"
+            className="fixed inset-0 z-[90] lg:hidden flex justify-center items-end bg-black/50"
           >
-            <div className="bg-neutral-900/95 border border-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl">
+            <div className="w-full max-w-md bg-neutral-900/95 border border-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl">
               <div className="flex flex-col gap-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.href, item.id)}
-                    className={`flex items-center gap-4 p-4 rounded-2xl transition-all ${
+                    className={`flex items-center gap-4 p-4 rounded-2xl transition-all w-full justify-start ${
                       activeItem === item.id 
                         ? 'bg-white/10 text-white' 
                         : 'text-gray-400 hover:text-white'
@@ -97,7 +93,7 @@ const DockNavbar = () => {
       </AnimatePresence>
 
       {/* Desktop Dock Navigation */}
-      <div className="fixed inset-x-0 bottom-8 z-[100] pointer-events-none flex justify-center">
+      <div className="fixed inset-x-0 bottom-8 z-[100] pointer-events-none flex justify-center lg:flex hidden">
         <motion.nav
           initial={{ y: 100, opacity: 0 }}
           animate={{ 
@@ -115,7 +111,6 @@ const DockNavbar = () => {
                 onClick={() => scrollToSection(item.href, item.id)}
                 className="relative p-3 rounded-full transition-all group"
               >
-                {/* Tooltip */}
                 <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-neutral-800 text-white text-[10px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 uppercase tracking-widest">
                   {item.label}
                 </span>
@@ -127,7 +122,6 @@ const DockNavbar = () => {
                   }`} 
                 />
 
-                {/* Active Indicator */}
                 {isActive && (
                   <motion.div
                     layoutId="dock-active"
@@ -135,8 +129,7 @@ const DockNavbar = () => {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                
-                {/* Small dot below active icon */}
+
                 {isActive && (
                   <motion.div 
                     layoutId="dot"
@@ -149,7 +142,6 @@ const DockNavbar = () => {
 
           <div className="w-[1px] h-6 bg-white/10 mx-2" />
 
-          {/* Scroll to top button */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="p-3 rounded-full text-gray-500 hover:text-white transition-colors group"

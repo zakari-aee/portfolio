@@ -2,173 +2,144 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import {
-  FaReact, FaPython, FaGitAlt, FaLinux, FaLaravel, FaNodeJs, FaJsSquare, FaCode,
+import { 
+  FaReact, FaPython, FaGitAlt, FaLinux, FaLaravel, FaNodeJs, FaJsSquare, FaWindows, FaPhp
 } from 'react-icons/fa';
-import {
-  SiTailwindcss, SiPostgresql, SiMongodb, SiMysql, SiVim, SiArchlinux, SiDocker
+import { 
+  SiTailwindcss, SiPostgresql, SiMongodb, SiDocker, SiNextdotjs, SiTypescript, SiC, SiMysql, SiFramer, SiVim
 } from 'react-icons/si';
-import { Brain, Sparkles, Code2, Globe, Cpu } from 'lucide-react';
+import { ArrowUpRight, Brain, Users, Target, Zap, Terminal } from 'lucide-react';
 
 const Skills = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const skillsRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const skillsRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+        if (skillsRef.current) observer.observe(skillsRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    const technicalStack = [
+        { name: 'React', icon: <FaReact />, color: 'group-hover:text-[#61DAFB]' },
+        { name: 'Next.js', icon: <SiNextdotjs />, color: 'group-hover:text-white' },
+        { name: 'TypeScript', icon: <SiTypescript />, color: 'group-hover:text-[#3178C6]' },
+        { name: 'JavaScript', icon: <FaJsSquare />, color: 'group-hover:text-[#F7DF1E]' },
+        { name: 'Tailwind', icon: <SiTailwindcss />, color: 'group-hover:text-[#06B6D4]' },
+        { name: 'Framer', icon: <SiFramer />, color: 'group-hover:text-[#0055FF]' },
+        { name: 'Node.js', icon: <FaNodeJs />, color: 'group-hover:text-[#339933]' },
+        { name: 'Python', icon: <FaPython />, color: 'group-hover:text-[#3776AB]' },
+        { name: 'Laravel', icon: <FaLaravel />, color: 'group-hover:text-[#FF2D20]' },
+        { name: 'PHP', icon: <FaPhp />, color: 'group-hover:text-[#777BB4]' },
+        { name: 'MySQL', icon: <SiMysql />, color: 'group-hover:text-[#4479A1]' },
+        { name: 'Postgres', icon: <SiPostgresql />, color: 'group-hover:text-[#4169E1]' },
+        { name: 'C Lang', icon: <SiC />, color: 'group-hover:text-[#A8B9CC]' },
+        { name: 'Vim', icon: <SiVim />, color: 'group-hover:text-[#199C4B]' },
+        { name: 'Linux', icon: <FaLinux />, color: 'group-hover:text-white' },
+        { name: 'Windows', icon: <FaWindows />, color: 'group-hover:text-[#0078D4]' },
+        { name: 'Docker', icon: <SiDocker />, color: 'group-hover:text-[#2496ED]' },
+        { name: 'Git', icon: <FaGitAlt />, color: 'group-hover:text-[#F05032]' },
+    ];
+
+    const softSkills = [
+        { name: "Problem Solving", icon: <Brain size={20}/>, desc: "Algorithmic thinking" },
+        { name: "Team Work", icon: <Users size={20}/>, desc: "Collaborative dev" },
+        { name: "Adaptability", icon: <Zap size={20}/>, desc: "Rapid learning" },
+    ];
+
+    return (
+        <section
+            id="skills"
+            ref={skillsRef}
+            className="min-h-screen py-20 bg-[#050505] text-white flex flex-col justify-center relative overflow-hidden border-t border-white/5"
+        >
+            <div className="w-full px-6 md:px-12 lg:px-24 relative z-10">
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                    
+                    {/* LEFT: Clean Sticky Sidebar */}
+                    <motion.div 
+                        className="lg:col-span-3 lg:sticky lg:top-32 h-fit"
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                    >
+                        <div className="flex items-center gap-3 mb-6">
+                            <Terminal size={16} className="text-purple-400" />
+                            <span className="text-[12px] font-bold tracking-[0.4em] uppercase text-purple-500">Inventory // 03</span>
+                        </div>
+                        <h2 className="text-6xl font-bold tracking-tighter uppercase mb-10 leading-[0.9]">
+                            Skill<br />
+                            <span className="text-neutral-700 italic">Set.</span>
+                        </h2>
+                        
+                        {/* Soft Skills List - Simplified for fit */}
+                        <div className="space-y-6 pt-10 border-t border-white/10">
+                            {softSkills.map((s, idx) => (
+                                <div key={idx} className="flex items-center gap-4 group">
+                                    <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-neutral-500 group-hover:text-purple-400 transition-colors">
+                                        {s.icon}
+                                    </div>
+                                    <div>
+                                        <p className="text-[12px] font-bold uppercase tracking-tight text-neutral-300">{s.name}</p>
+                                        <p className="text-[9px] uppercase text-neutral-600 tracking-widest">{s.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* RIGHT: Technical Grid - Optimized for all screens */}
+                    <div className="lg:col-span-9">
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                            {technicalStack.map((skill, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                                    transition={{ duration: 0.4, delay: idx * 0.02 }}
+                                    className="group relative flex flex-col items-center justify-center p-4 md:p-8 bg-white/[0.02] border border-white/5 rounded-[2rem] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-500 aspect-square"
+                                >
+                                    <div className={`text-2xl md:text-4xl transition-all duration-500 group-hover:scale-110 ${skill.color}`}>
+                                        {skill.icon}
+                                    </div>
+                                    <span className="mt-4 text-[9px] font-bold tracking-[0.2em] uppercase text-neutral-600 group-hover:text-white transition-colors text-center">
+                                        {skill.name}
+                                    </span>
+                                    
+                                    {/* Subtle Glow Background */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem]" />
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Status Footer */}
+                        <motion.div 
+                            className="mt-12 flex flex-col md:flex-row justify-between items-center gap-8 py-8 border-t border-white/5"
+                            initial={{ opacity: 0 }}
+                            animate={isVisible ? { opacity: 1 } : {}}
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-500">Environment Ready</span>
+                            </div>
+                            <button className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-purple-400 transition-colors group">
+                                Explore Full Stack <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            </button>
+                        </motion.div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     );
-    if (skillsRef.current) observer.observe(skillsRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollingSkills = [
-    { icon: <FaReact />, name: 'React' },
-    { icon: <FaJsSquare />, name: 'JS' },
-    { icon: <FaPython />, name: 'Python' },
-    { icon: <FaNodeJs />, name: 'Node' },
-    { icon: <FaLaravel />, name: 'Laravel' },
-    { icon: <SiTailwindcss />, name: 'Tailwind' },
-    { icon: <SiPostgresql />, name: 'Postgres' },
-    { icon: <SiMongodb />, name: 'MongoDB' },
-    { icon: <FaGitAlt />, name: 'Git' },
-    { icon: <SiVim />, name: 'Vim' },
-    { icon: <FaLinux />, name: 'Linux' },
-    { icon: <SiDocker />, name: 'Docker' },
-  ];
-
-  const focusAreas = [
-    {
-      title: "Frontend Engineering",
-      icon: <Globe className="w-6 h-6 text-blue-400" />,
-      description: "Crafting immersive, responsive interfaces with React and Tailwind, focusing on performance and user experience.",
-      skills: ["React", "Next.js", "Framer Motion"]
-    },
-    {
-      title: "Backend Architecture",
-      icon: <Cpu className="w-6 h-6 text-purple-400" />,
-      description: "Building robust server-side logic and scalable databases using Node.js, Python, and relational systems.",
-      skills: ["Node.js", "Laravel", "PostgreSQL"]
-    },
-    {
-      title: "System Thinking",
-      icon: <Code2 className="w-6 h-6 text-emerald-400" />,
-      description: "Solving complex problems through algorithmic efficiency and low-level optimization (C, Shell, Unix).",
-      skills: ["Algorithms", "C", "Unix"]
-    }
-  ];
-
-  return (
-    <section
-      id="skills"
-      ref={skillsRef}
-      className="min-h-screen py-24 bg-neutral-950 relative overflow-hidden flex flex-col justify-center"
-    >
-      {/* Background Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          className="max-w-3xl mb-20"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-12 h-[1px] bg-blue-500"></span>
-            <span className="text-blue-400 font-medium tracking-wider uppercase text-sm">Capabilities</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            The tools I use to <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-purple-600">
-              bring ideas to life.
-            </span>
-          </h2>
-        </motion.div>
-
-        {/* Focus Area Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {focusAreas.map((area, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: idx * 0.15 }}
-              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-500"
-            >
-              <div className="mb-6 p-3 w-fit rounded-2xl bg-white/5 group-hover:scale-110 transition-transform duration-500">
-                {area.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">{area.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                {area.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {area.skills.map(s => (
-                  <span key={s} className="text-[10px] uppercase tracking-widest text-gray-500 font-bold px-2 py-1 rounded bg-white/5">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Infinite Marquee Section */}
-        <div className="relative w-full overflow-hidden py-10">
-          {/* Fading Edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-950 to-transparent z-20" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-950 to-transparent z-20" />
-
-          <motion.div 
-            className="flex whitespace-nowrap gap-12 items-center"
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            {[...scrollingSkills, ...scrollingSkills].map((skill, i) => (
-              <div key={i} className="flex items-center gap-4 text-gray-500 hover:text-white transition-colors cursor-default group">
-                <span className="text-4xl group-hover:scale-110 group-hover:text-blue-400 transition-all duration-300">
-                  {skill.icon}
-                </span>
-                <span className="text-lg font-medium tracking-tighter uppercase">{skill.name}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-800 mx-4" />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Soft Skills Footer */}
-        <motion.div 
-           initial={{ opacity: 0 }}
-           animate={isVisible ? { opacity: 1 } : {}}
-           className="mt-20 flex flex-wrap justify-center gap-10 opacity-60"
-        >
-            <div className="flex items-center gap-2 text-gray-400">
-              <Brain className="w-4 h-4" />
-              <span className="text-xs uppercase tracking-widest font-semibold">Problem Solver</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-400">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-xs uppercase tracking-widest font-semibold">Adaptive Learner</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-400">
-              <Code2 className="w-4 h-4" />
-              <span className="text-xs uppercase tracking-widest font-semibold">Clean Code</span>
-            </div>
-        </motion.div>
-      </div>
-    </section>
-  );
 };
 
 export default Skills;
