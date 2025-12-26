@@ -30,4 +30,4 @@ out/
 *.war
 *.iml
 *.ipr
-*.iws
+*.iwsdist/
