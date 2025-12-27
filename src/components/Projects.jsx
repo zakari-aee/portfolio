@@ -29,7 +29,7 @@ const Projects = () => {
             category: "Full Stack",
             description: "High-performance retail engine with real-time inventory and secure Stripe integration.",
             tags: ["Next.js", "Postgres", "Stripe"],
-            image: "/public/image.png", // Replace with your screenshot
+            image: "/image.png", // Replace with your screenshot
             color: "from-cyan-500/20"
         },
         {
@@ -38,7 +38,7 @@ const Projects = () => {
             category: "Low-Level",
             description: "A C-based monitoring tool designed for tracking CPU thermal loads in Unix clusters.",
             tags: ["C Language", "Linux", "SysCall"],
-            image: "/public/image2.png", // Replace with your screenshot
+            image: "/image2.png", // Replace with your screenshot
             color: "from-purple-500/20"
         }
     ];
