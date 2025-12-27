@@ -65,61 +65,48 @@ const DockNavbar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <div className="fixed top-6 right-6 z-[100] lg:hidden">
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-3 rounded-xl bg-neutral-900/80 border border-white/10 text-white backdrop-blur-md"
-        >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-
-
-      {/* Mobile Navigation Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 z-[90] lg:hidden bg-black/50"
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            className="fixed bottom-24 right-6 z-[91] lg:hidden"
-          >
-            <div className="bg-neutral-900/95 border border-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-2xl w-48">
-              <div className="flex flex-col gap-2">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.href, item.id)}
-                    className={`flex items-center gap-3 p-3 rounded-lg transition-all w-full justify-start text-sm font-medium ${
-                      activeItem === item.id 
-                        ? 'bg-white/10 text-white' 
-                        : 'text-gray-400 hover:text-white'
+      {/* Mobile Bottom Navigation */}
+      <motion.nav
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        className="fixed inset-x-0 bottom-0 z-[100] lg:hidden bg-neutral-900/95 border-t border-white/10 backdrop-blur-xl"
+      >
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-1 flex-1 justify-around">
+            {navItems.map((item) => {
+              const isActive = activeItem === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.href, item.id)}
+                  className="relative p-3 rounded-lg transition-all group flex flex-col items-center"
+                >
+                  <item.icon
+                    size={20}
+                    className={`transition-colors duration-300 ${
+                      isActive ? 'text-white' : 'text-gray-500'
                     }`}
-                  >
-                    <item.icon size={16} />
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  />
+                  {isActive && (
+                    <motion.div
+                      layoutId="mobile-dot"
+                      className="absolute -bottom-1 w-1 h-1 bg-blue-500 rounded-full"
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="p-3 rounded-lg text-gray-500 hover:text-white transition-colors"
+          >
+            <ArrowUp size={20} />
+          </button>
+        </div>
+      </motion.nav>
 
       {/* Desktop Dock Navigation */}
       <div className="fixed inset-x-0 bottom-8 z-[100] pointer-events-none justify-center hidden lg:flex">
@@ -179,6 +166,9 @@ const DockNavbar = () => {
           </button>
         </motion.nav>
       </div>
+
+      {/* Add padding to body for mobile navbar */}
+      <div className="h-16 lg:hidden" />
     </>
   );
 };
