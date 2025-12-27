@@ -166,19 +166,6 @@ const Skills = () => {
                   className="group-hover:translate-x-1 transition-transform"
                 />
               </a>
-
-              <a
-                href="https://leetcode.com/zakari_aee/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-white hover:text-yellow-500 transition-colors group"
-              >
-                <SiLeetcode size={16} /> LeetCode{" "}
-                <ExternalLink
-                  size={12}
-                  className="group-hover:translate-x-0.5 transition-transform"
-                />
-              </a>
             </div>
           </div>
         </div>

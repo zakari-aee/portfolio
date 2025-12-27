@@ -33,10 +33,9 @@ const Projects = () => {
   const projects = [
     {
       id: "01",
-      title: "E-Commerce System",
+      title: "El Hilali - E-Commerce System",
       category: "Full Stack",
-      description:
-        "High-performance retail engine with real-time inventory and secure Stripe integration.",
+      description: "Full-stack luxury e-commerce platform with advanced filtering, WhatsApp integration, multilingual support, and real-time product management with bulk pricing.",
       tags: ["React", "Tailwind CSS", "express.js", "Stripe API", "MongoDB"],
       image: "/image.png",
       color: "from-cyan-500/20",
