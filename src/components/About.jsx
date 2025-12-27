@@ -26,15 +26,16 @@ const About = () => {
         <section
             id="about"
             ref={sectionRef}
-            className="min-h-screen py-24 bg-[#050505] text-white border-t border-white/5 overflow-hidden"
+            className="min-h-screen py-24 bg-[#050505] text-white border-t border-white/5 relative"
         >
             {/* SOFT BACKGROUND — SAFE */}
-            <div className="absolute inset-0 pointer-events-none opacity-20">
+            <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 blur-[120px] rounded-full" />
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 blur-[120px] rounded-full" />
             </div>
 
-            <div className="w-full px-6 md:px-12 lg:px-24 relative z-10 max-w-7xl mx-auto">
+            <div className="relative z-10 w-screen left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] px-6 md:px-12 lg:px-24">
+                <div className="max-w-7xl mx-auto">
 
                 {/* TITLE — CENTER */}
                 <motion.div
@@ -61,16 +62,16 @@ const About = () => {
                 </motion.div>
 
                 {/* BOTTOM — ONE LINE (IMAGE | TEXT) */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
                     {/* IMAGE */}
                     <motion.div
-                        className="lg:col-span-5"
+                        className="lg:col-span-5 w-full min-w-0"
                         initial={{ opacity: 0, y: 30 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7 }}
                     >
-                        <div className="relative rounded-[2.5rem] overflow-hidden bg-white/[0.02] border border-white/10">
+                        <div className="relative rounded-[2.5rem] overflow-hidden bg-white/[0.02] border border-white/10 w-full">
                             <img
                                 src="/me.png"
                                 alt="Profile"
@@ -81,7 +82,7 @@ const About = () => {
 
                     {/* TEXT */}
                     <motion.div
-                        className="lg:col-span-7"
+                        className="lg:col-span-7 w-full min-w-0"
                         initial={{ opacity: 0, y: 30 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7, delay: 0.1 }}
@@ -112,9 +113,9 @@ const About = () => {
                             <ArrowRight size={14} />
                         </motion.a>
                     </motion.div>
-
                 </div>
             </div>
+        </div>
         </section>
     );
 };

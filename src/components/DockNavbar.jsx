@@ -9,6 +9,20 @@ const DockNavbar = () => {
   const [isDockVisible, setIsDockVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navItems = [
     { id: 'home', label: 'Home', icon: Home, href: '#home' },
     { id: 'about', label: 'About', icon: User, href: '#about' },
@@ -61,29 +75,44 @@ const DockNavbar = () => {
         </button>
       </div>
 
+
+
       {/* Mobile Navigation Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="fixed inset-0 z-[90] lg:hidden bg-black/50"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="fixed inset-0 z-[90] lg:hidden flex justify-center items-end bg-black/50"
+            className="fixed bottom-24 right-6 z-[91] lg:hidden"
           >
-            <div className="w-full max-w-md bg-neutral-900/95 border border-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl">
+            <div className="bg-neutral-900/95 border border-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-2xl w-48">
               <div className="flex flex-col gap-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.href, item.id)}
-                    className={`flex items-center gap-4 p-4 rounded-2xl transition-all w-full justify-start ${
+                    className={`flex items-center gap-3 p-3 rounded-lg transition-all w-full justify-start text-sm font-medium ${
                       activeItem === item.id 
                         ? 'bg-white/10 text-white' 
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
-                    <item.icon size={18} />
-                    <span className="text-sm font-medium">{item.label}</span>
+                    <item.icon size={16} />
+                    <span>{item.label}</span>
                   </button>
                 ))}
               </div>
@@ -93,7 +122,7 @@ const DockNavbar = () => {
       </AnimatePresence>
 
       {/* Desktop Dock Navigation */}
-      <div className="fixed inset-x-0 bottom-8 z-[100] pointer-events-none flex justify-center lg:flex hidden">
+      <div className="fixed inset-x-0 bottom-8 z-[100] pointer-events-none justify-center hidden lg:flex">
         <motion.nav
           initial={{ y: 100, opacity: 0 }}
           animate={{ 
@@ -111,7 +140,7 @@ const DockNavbar = () => {
                 onClick={() => scrollToSection(item.href, item.id)}
                 className="relative p-3 rounded-full transition-all group"
               >
-                <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-neutral-800 text-white text-[10px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 uppercase tracking-widest">
+                <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-neutral-800 text-white text-[10px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 uppercase tracking-widest whitespace-nowrap">
                   {item.label}
                 </span>
 

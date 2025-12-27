@@ -7,17 +7,15 @@ import Contact from "./components/Contact";
 import DockNavbar from "./components/DockNavbar";
 
 function App() {
-
-
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-white">
+    <div className="w-screen overflow-x-hidden bg-black">
       <Hero />
-      <About />
-      <Education />
-      <Skills />
-      <Projects />
-      <Contact />
-      <DockNavbar />
+        <About />
+        <Education />
+        <Skills />
+        <Projects />
+        <Contact />
+        <DockNavbar />
     </div>
   );
 }
