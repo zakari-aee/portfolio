@@ -46,25 +46,25 @@ const Skills = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Added 'color' property with official brand hex codes
   const technicalSkills = [
-    { icon: <FaReact />, name: "React" },
-    { icon: <FaReact />, name: "React Native" },
-    { icon: <FaJsSquare />, name: "JavaScript" },
-    { icon: <SiTypescript />, name: "TypeScript" },
-    { icon: <SiTailwindcss />, name: "TailwindCSS" },
-    { icon: <SiNextdotjs />, name: "Next.js" },
-    { icon: <FaNodeJs />, name: "Node.js" },
-    // { icon: <FaCode />, name: 'Express' },
-    { icon: <FaLaravel />, name: "Laravel" },
-    { icon: <FaPhp />, name: "PHP" },
-    { icon: <FaPython />, name: "Python" },
-    { icon: <SiC />, name: "C" },
-    { icon: <SiPostgresql />, name: "PostgreSQL" },
-    { icon: <SiMysql />, name: "MySQL" },
-    { icon: <SiMongodb />, name: "MongoDB" },
-    { icon: <SiDocker />, name: "Docker" },
-    { icon: <FaGitAlt />, name: "Git" },
-    { icon: <FaLinux />, name: "Linux" },
+    { icon: <FaReact />, name: "React", color: "#61DAFB" },
+    { icon: <FaReact />, name: "React Native", color: "#61DAFB" },
+    { icon: <FaJsSquare />, name: "JavaScript", color: "#F7DF1E" },
+    { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6" },
+    { icon: <SiTailwindcss />, name: "TailwindCSS", color: "#06B6D4" },
+    { icon: <SiNextdotjs />, name: "Next.js", color: "#ffffff" }, // White for dark mode
+    { icon: <FaNodeJs />, name: "Node.js", color: "#339933" },
+    { icon: <FaLaravel />, name: "Laravel", color: "#FF2D20" },
+    { icon: <FaPhp />, name: "PHP", color: "#777BB4" },
+    { icon: <FaPython />, name: "Python", color: "#3776AB" },
+    { icon: <SiC />, name: "C", color: "#A8B9CC" },
+    { icon: <SiPostgresql />, name: "PostgreSQL", color: "#4169E1" },
+    { icon: <SiMysql />, name: "MySQL", color: "#4479A1" },
+    { icon: <SiMongodb />, name: "MongoDB", color: "#47A248" },
+    { icon: <SiDocker />, name: "Docker", color: "#2496ED" },
+    { icon: <FaGitAlt />, name: "Git", color: "#F05032" },
+    { icon: <FaLinux />, name: "Linux", color: "#FCC624" },
   ];
 
   const softSkills = [
@@ -84,7 +84,7 @@ const Skills = () => {
     >
       <div className="w-full px-6 md:px-12 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          {/* Title - Show first on mobile, right on desktop */}
+          {/* Title */}
           <motion.div
             className="col-span-1 lg:col-span-3 order-first lg:order-last lg:sticky lg:top-32 h-fit"
             initial={{ opacity: 0, y: -30 }}
@@ -119,12 +119,16 @@ const Skills = () => {
                 {technicalSkills.map((skill, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all flex flex-col items-center justify-center"
+                    // 1. We pass the color as a CSS variable here
+                    style={{ "--skill-color": skill.color }}
+                    className="group p-4 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all flex flex-col items-center justify-center cursor-default"
                   >
-                    <div className="text-3xl md:text-4xl mb-3 text-neutral-400">
+                    {/* 2. We use text-[var(--skill-color)] on group-hover */}
+                    <div className="text-3xl md:text-4xl mb-3 text-neutral-400 transition-colors duration-300 group-hover:text-[var(--skill-color)]">
                       {skill.icon}
                     </div>
-                    <span className="text-[10px] font-bold text-neutral-500 text-center">
+                    {/* Optional: Also color the text on hover? If so, add the group-hover class here too */}
+                    <span className="text-[10px] font-bold text-neutral-500 text-center transition-colors duration-300 group-hover:text-white">
                       {skill.name}
                     </span>
                   </div>
@@ -141,12 +145,13 @@ const Skills = () => {
                 {softSkills.map((skill, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all flex flex-col items-center justify-center"
+                    className="group p-4 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all flex flex-col items-center justify-center"
                   >
-                    <div className="text-3xl md:text-4xl mb-3 text-neutral-400">
+                    {/* Soft skills default to white or blue on hover since they don't have brand colors */}
+                    <div className="text-3xl md:text-4xl mb-3 text-neutral-400 transition-colors duration-300 group-hover:text-white">
                       {skill.icon}
                     </div>
-                    <span className="text-[10px] font-bold text-neutral-500 text-center">
+                    <span className="text-[10px] font-bold text-neutral-500 text-center transition-colors duration-300 group-hover:text-white">
                       {skill.name}
                     </span>
                   </div>
@@ -154,7 +159,7 @@ const Skills = () => {
               </div>
             </div>
 
-            {/* CTA with LeetCode Link */}
+            {/* CTA */}
             <div className="pt-8 border-t border-white/5 flex items-center justify-between">
               <a
                 href="#projects"
