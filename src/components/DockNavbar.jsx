@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, GraduationCap, Code, Folder, Mail, ArrowUp, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Home, User, GraduationCap, Code, Folder, Mail, ArrowUp } from 'lucide-react';
 
 const DockNavbar = () => {
   const [activeItem, setActiveItem] = useState('home');

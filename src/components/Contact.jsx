@@ -83,23 +83,38 @@ const Contact = () => {
                             <div className="space-y-6">
                                 <a 
                                     href="mailto:zakariaealliouate@gmail.com" 
+                                    target='_blank'
+                                    rel="noopener noreferrer"
                                     className="group flex items-center justify-between py-4 border-b border-white/5 hover:border-white transition-colors"
                                 >
-                                    <span className="text-xl md:text-2xl font-light group-hover:pl-4 transition-all duration-300">Email</span>
+                                    <div className="flex items-center gap-3">
+                                        <Mail className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors" />
+                                        <span className="text-xl md:text-2xl font-light group-hover:pl-2 transition-all duration-300">Email</span>
+                                    </div>
                                     <ArrowUpRight className="text-neutral-600 group-hover:text-white transition-colors" />
                                 </a>
                                 <a 
-                                    href="https://linkedin.com/in/zakariae-alliouate" 
+                                    href="https://linkedin.com/in/zakariae-alliouate"
+                                    target='_blank'
+                                    rel="noopener noreferrer"
                                     className="group flex items-center justify-between py-4 border-b border-white/5 hover:border-white transition-colors"
                                 >
-                                    <span className="text-xl md:text-2xl font-light group-hover:pl-4 transition-all duration-300">LinkedIn</span>
+                                    <div className="flex items-center gap-3">
+                                        <Linkedin className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors" />
+                                        <span className="text-xl md:text-2xl font-light group-hover:pl-2 transition-all duration-300">LinkedIn</span>
+                                    </div>
                                     <ArrowUpRight className="text-neutral-600 group-hover:text-white transition-colors" />
                                 </a>
                                 <a 
-                                    href="https://github.com/zakari-aee" 
+                                    href="https://github.com/zakari-aee"
+                                    target='_blank'
+                                    rel="noopener noreferrer"
                                     className="group flex items-center justify-between py-4 border-b border-white/5 hover:border-white transition-colors"
                                 >
-                                    <span className="text-xl md:text-2xl font-light group-hover:pl-4 transition-all duration-300">GitHub</span>
+                                    <div className="flex items-center gap-3">
+                                        <Github className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors" />
+                                        <span className="text-xl md:text-2xl font-light group-hover:pl-2 transition-all duration-300">GitHub</span>
+                                    </div>
                                     <ArrowUpRight className="text-neutral-600 group-hover:text-white transition-colors" />
                                 </a>
                             </div>
