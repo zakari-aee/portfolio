@@ -6,10 +6,8 @@ import {
   Github,
   ExternalLink,
   Terminal,
-  Layout,
-  Cpu,
-  Globe,
-  Monitor,
+  Folder,
+  ArrowUpRight,
 } from "lucide-react";
 
 const Projects = () => {
@@ -33,10 +31,10 @@ const Projects = () => {
   const projects = [
     {
       id: "01",
-      title: "El Hilali - E-Commerce System",
+      title: "El Hilali E-Com",
       category: "Full Stack",
-      description: "Full-stack luxury e-commerce platform with advanced filtering, WhatsApp integration, multilingual support, and real-time product management with bulk pricing.",
-      tags: ["React", "Tailwind CSS", "express.js", "Stripe API", "MongoDB"],
+      description: "Luxury e-commerce with WhatsApp integration, multilingual support, and bulk pricing management.",
+      tags: ["React", "Tailwind", "Express", "Stripe"],
       image: "/image.png",
       color: "from-cyan-500/20",
       github: "https://github.com/zakari-aee/store",
@@ -44,10 +42,10 @@ const Projects = () => {
     },
     {
       id: "02",
-      title: "Bricol - Home Services Marketplace",
+      title: "Bricol Market",
       category: "Full Stack",
       description:
-        "A comprehensive home services marketplace connecting skilled workers with customers. Features AI-powered chatbot, real-time job matching, integrated payment system, and multi-language support for seamless service discovery and booking.",
+        "Marketplace connecting skilled workers with customers. Features AI chatbot and real-time job matching.",
       tags: ["Laravel", "React", "Python"],
       image: "/image2.png",
       color: "from-blue-500/20",
@@ -56,11 +54,11 @@ const Projects = () => {
     },
     {
       id: "03",
-      title: "Oussama Barbershop",
-      category: "Full Stack",
+      title: "Oussama Barber",
+      category: "Frontend",
       description:
-        "A premium barber shop website featuring interactive before/after gallery, smooth animations, and responsive design for seamless client booking experience.",
-      tags: ["React", "Tailwind CSS", "Framer Motion", "Lucide React"],
+        "Premium barber shop site with interactive gallery and smooth booking animations.",
+      tags: ["React", "Framer Motion", "Lucide"],
       image: "/oussama.png",
       color: "from-red-500/20",
       github: "https://github.com/zakari-aee/oussama-barbershop",
@@ -72,113 +70,94 @@ const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="min-h-screen py-24 bg-[#050505] text-white overflow-hidden border-t border-white/5"
+      className="min-h-screen py-20 bg-[#050505] text-white overflow-hidden border-t border-white/5"
     >
       <div className="w-full px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* LEFT SIDEBAR: Sticky Title */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          
+          {/* LEFT SIDEBAR: Compact Sticky Title */}
           <motion.div
             className="lg:col-span-3 lg:sticky lg:top-32 h-fit"
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
           >
-            <div className="flex items-center gap-2 mb-4">
-              <Terminal size={14} className="text-blue-500" />
-              <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-neutral-500">
-                Works // 03
+            <div className="flex items-center gap-2 mb-3">
+              <Terminal size={12} className="text-blue-500" />
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-500">
+                Selected Works
               </span>
             </div>
-            <h2 className="text-6xl font-bold tracking-tighter uppercase mb-8 leading-[0.85]">
-              Select
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter uppercase mb-6 text-white">
+              Recent
               <br />
-              Project.
+              <span className="text-neutral-500">Projects.</span>
             </h2>
-            <p className="text-neutral-500 text-sm leading-relaxed max-w-[220px] font-light">
-              Showcasing technical architecture and specialized software
-              deployments.
+            <p className="text-neutral-500 text-xs leading-relaxed max-w-[200px] font-light">
+              A curated selection of technical deployments and full-stack applications.
             </p>
           </motion.div>
 
-          {/* RIGHT: Large Visual Cards */}
-          <div className="lg:col-span-9 space-y-10">
+          {/* RIGHT: Grid of Compact Cards */}
+          <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="group relative bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-white/20 transition-all duration-700"
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="group flex flex-col bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 hover:bg-white/[0.04] transition-all duration-300"
               >
-                <div className="grid grid-cols-1 xl:grid-cols-2">
-                  {/* CONTENT AREA */}
-                  <div className="p-10 md:p-14 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-3 mb-6">
-                        <span className="text-[10px] font-mono text-neutral-600">
-                          {project.id}
-                        </span>
-                        <div className="w-8 h-[1px] bg-neutral-800" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-400">
-                          {project.category}
-                        </span>
-                      </div>
-
-                      <h3 className="text-4xl font-bold tracking-tighter text-white mb-4 uppercase group-hover:text-blue-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-neutral-400 text-base leading-relaxed mb-8 font-light">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-10">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-4 py-1.5 bg-white/5 border border-white/5 rounded-full text-[10px] font-bold text-neutral-500 uppercase"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                {/* IMAGE AREA - Compact Height */}
+                <div className="relative h-48 overflow-hidden w-full bg-neutral-900 border-b border-white/5">
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t ${project.color} to-transparent z-10 opacity-40 group-hover:opacity-20 transition-opacity duration-500`}
+                  />
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Floating ID badge */}
+                  <div className="absolute top-3 right-3 z-20">
+                    <div className="bg-black/60 backdrop-blur-md px-2 py-1 rounded border border-white/10 flex items-center gap-2">
+                       <span className="text-[10px] font-mono text-neutral-400">{project.id}</span>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="flex gap-4">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:text-white text-neutral-500 transition-colors group/link"
-                      >
-                        <Github size={14} /> Repository
-                      </a>
-
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:text-white text-neutral-500 transition-colors group/link"
-                      >
-                        <ExternalLink size={14} /> Live Demo
-                      </a>
+                {/* CONTENT AREA */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                        <span className="text-[9px] font-bold uppercase tracking-widest text-blue-400 mb-1 block">
+                            {project.category}
+                        </span>
+                        <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                            {project.title}
+                        </h3>
+                    </div>
+                    
+                    {/* Icon links moved to top right of content for cleaner look */}
+                    <div className="flex gap-3 pt-1">
+                        <a href={project.github} target="_blank" className="text-neutral-500 hover:text-white transition-colors"><Github size={16} /></a>
+                        <a href={project.live} target="_blank" className="text-neutral-500 hover:text-white transition-colors"><ExternalLink size={16} /></a>
                     </div>
                   </div>
 
-                  {/* IMAGE AREA - The Mockup */}
-                  <div className="relative h-[300px] xl:h-auto overflow-hidden bg-neutral-900 border-l border-white/5">
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.color} to-transparent z-10 opacity-60 group-hover:opacity-20 transition-opacity duration-700`}
-                    />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                    />
-                    {/* Floating Window Decoration */}
-                    <div className="absolute top-4 right-4 z-20">
-                      <div className="bg-black/50 backdrop-blur-md p-2 rounded-lg border border-white/10">
-                        <Monitor size={16} className="text-white/50" />
-                      </div>
-                    </div>
+                  <p className="text-neutral-400 text-xs leading-relaxed mb-6 font-light line-clamp-2">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-auto flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 bg-white/5 rounded text-[9px] font-medium text-neutral-400 uppercase tracking-wide border border-white/5"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </motion.div>
