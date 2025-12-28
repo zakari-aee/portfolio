@@ -44,15 +44,15 @@ const Projects = () => {
     },
     {
       id: "02",
-      title: "System Monitor OS",
+      title: "Bricol - Home Services Marketplace",
       category: "Full Stack",
       description:
-        "A C-based monitoring tool designed for tracking CPU thermal loads in Unix clusters.",
-      tags: ["React", "Tailwind CSS", "express.js", "MongoDB"],
+        "A comprehensive home services marketplace connecting skilled workers with customers. Features AI-powered chatbot, real-time job matching, integrated payment system, and multi-language support for seamless service discovery and booking.",
+      tags: ["Laravel", "React", "Python"],
       image: "/image2.png",
-      color: "from-purple-500/20",
-      github: "https://github.com/your-username/system-monitor",
-      live: "https://your-system-monitor-live-url.com",
+      color: "from-blue-500/20",
+      github: "https://github.com/zakari-aee/bricol",
+      live: "https://bricol.vercel.app",
     },
     {
       id: "03",
