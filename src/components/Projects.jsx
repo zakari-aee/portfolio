@@ -54,6 +54,18 @@ const Projects = () => {
       github: "https://github.com/your-username/system-monitor",
       live: "https://your-system-monitor-live-url.com",
     },
+    {
+      id: "03",
+      title: "Oussama Barbershop",
+      category: "Full Stack",
+      description:
+        "A premium barber shop website featuring interactive before/after gallery, smooth animations, and responsive design for seamless client booking experience.",
+      tags: ["React", "Tailwind CSS", "Framer Motion", "Lucide React"],
+      image: "/oussama.png",
+      color: "from-red-500/20",
+      github: "https://github.com/zakari-aee/oussama-barbershop",
+      live: "https://oussamabarber.vercel.app/",
+    }
   ];
 
   return (
